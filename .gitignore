@@ -48,3 +48,4 @@ typings/
 ios/Pods
 ios/fastlane/screenshots
 
+release-key.keystore

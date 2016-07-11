@@ -96,6 +96,14 @@ android {
             abiFilters "armeabi-v7a", "x86"
         }
     }
+    signingConfigs {
+        release {
+            storeFile file(WETOO_RELEASE_STORE_FILE)
+            storePassword WETOO_RELEASE_STORE_PASSWORD
+            keyAlias WETOO_RELEASE_KEY_ALIAS
+            keyPassword WETOO_RELEASE_KEY_PASSWORD
+        }
+    }
     splits {
         abi {
             reset()
@@ -109,6 +117,7 @@ android {
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
             buildConfigField "String", "CODEPUSH_KEY", '"8lIAIm8wVQpCbKtpTWngNl0vG5Yi4J0AfsYH-"'
+            signingConfig signingConfigs.release
         }
         debug {
             buildConfigField "String", "CODEPUSH_KEY", '"KNd366j6yr_wV22dMUAjfmJPMoKy4J0AfsYH-"'
