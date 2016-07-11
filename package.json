@@ -1,0 +1,37 @@
+{
+  "name": "wetoo",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "lint": "eslint ./app"
+  },
+  "dependencies": {
+    "buffer": "^4.7.0",
+    "cheerio": "^0.20.0",
+    "events": "^1.1.1",
+    "moment": "^2.14.1",
+    "react": "15.2.1",
+    "react-native": "0.29.0",
+    "react-native-button": "^1.6.0",
+    "react-native-code-push": "^1.13.2-beta",
+    "react-native-cookies": "^1.0.2",
+    "react-native-gifted-listview": "BelinChung/react-native-gifted-listview#a64c4a5d66",
+    "react-native-htmlview": "^0.5.0",
+    "react-native-root-toast": "^1.0.3",
+    "react-native-router-flux": "^3.31.0",
+    "react-native-vector-icons": "^2.0.3",
+    "react-native-viewpager": "^0.2.11",
+    "react-redux": "^4.4.5",
+    "redux": "^3.5.2",
+    "redux-thunk": "^2.1.0",
+    "stream": "0.0.2"
+  },
+  "devDependencies": {
+    "babel-eslint": "^6.1.2",
+    "eslint": "^3.0.1",
+    "eslint-plugin-react": "^5.2.2",
+    "eslint-plugin-react-native": "^1.1.0",
+    "rnpm": "^1.9.0"
+  }
+}
