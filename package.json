@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
-    "lint": "eslint ./app"
+    "lint": "eslint ./src"
   },
   "dependencies": {
     "buffer": "^4.7.0",

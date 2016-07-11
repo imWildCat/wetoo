@@ -2,6 +2,7 @@ import React, {Component, PropTypes} from 'react';
 import { View, StyleSheet} from 'react-native';
 import ViewPager from 'react-native-viewpager';
 
+import PageContainer from '../../common/PageContainer';
 import TopicList from '../TopicList';
 import SegmentedControl from './SegmentedControl';
 
@@ -61,7 +62,7 @@ class DiscoveryTabPage extends Component {
         const titles = this.segmentedControlTitles;
 
         return (
-            <View style={{ flex: 1 }}>
+            <PageContainer>
                 <SegmentedControl buttonTitles={titles}
                     ref={(ref) => { this.segmentedControl = ref; }}
                     onPress={this.onSegmentedControlButtonPress.bind(this)}
@@ -76,7 +77,7 @@ class DiscoveryTabPage extends Component {
                     autoPlay={false}
                     renderPageIndicator={false}
                     />
-            </View>
+            </PageContainer>
         );
     }
 

@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import moment from 'moment';
+moment.locale('zh-cn');
 
 import App from './containers/App';
 

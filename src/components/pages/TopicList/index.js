@@ -1,10 +1,8 @@
 import React, {Component, PropTypes} from 'react';
-import { View, ListView, StatusBar, ActivityIndicator } from 'react-native';
+import { View, ListView, StatusBar, ActivityIndicator, InteractionManager } from 'react-native';
 
 import cheerio from 'cheerio';
 import moment from 'moment';
-
-moment.locale('zh-cn');
 
 import StringUtilities from '../../../utilities/string';
 import V2Networking from '../../../utilities/v2_networking';
@@ -27,7 +25,9 @@ class TopicListPage extends Component {
     }
 
     componentDidMount() {
-        this.loadList();
+        InteractionManager.runAfterInteractions(() => {
+            this.loadList();
+        });
     }
 
     loadList() {

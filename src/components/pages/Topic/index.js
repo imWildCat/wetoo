@@ -1,10 +1,10 @@
 import React, {Component, PropTypes} from 'react';
-import { View, ListView, StyleSheet, ActivityIndicator } from 'react-native';
-
+import { View, ListView, StyleSheet, ActivityIndicator, InteractionManager } from 'react-native';
 import cheerio from 'cheerio';
 
 import StringUtilities from '../../../utilities/string';
 
+import PageContainer from '../../common/PageContainer';
 import TopicHeader from './TopicHeader';
 import Post from './Post';
 
@@ -21,17 +21,16 @@ class TopicPage extends Component {
     }
 
     componentDidMount() {
-        const loadTopic = () => this.loadTopic();
-        setTimeout(function () {
-            loadTopic();
-        }, 500);
+        InteractionManager.runAfterInteractions(() => {
+            this.loadTopic();
+        });
     }
 
     render() {
         return (
-            <View style={styles.container} >
+            <PageContainer>
                 {this.renderPosts()}
-            </View>
+            </PageContainer>
         );
     }
 
@@ -153,9 +152,6 @@ TopicPage.propTypes = {
 };
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-    }
 });
 
 export default TopicPage;

@@ -23,21 +23,6 @@ const styles = StyleSheet.create({
     }
 });
 
-const wrapperStyle = {
-    paddingTop: 64,
-    backgroundColor: '#FFFFFF',
-    flex: 1,
-    overflow: 'hidden',
-};
-
-const pageWrapper = (Com) => {
-    let style = wrapperStyle;
-    if (Platform.os === 'android') {
-        style = [style, { paddingTop: 30 }];
-    }
-    return (props) => <View style={style}><Com {...props} /></View>;
-};
-
 class App extends Component {
     render() {
         return (
@@ -47,10 +32,10 @@ class App extends Component {
                         key="root"
                         titleStyle={styles.titleStyle}
                         navigationBarStyle={styles.navigationBarStyle}>
-                        <Scene key="discovery_tab" component={pageWrapper(DiscoveryTabPageContainer)} title="Wetoo" />
-                        <Scene key="topic" component={pageWrapper(TopicPageContainer)} title="阅读话题" />
-                        <Scene key="user" component={pageWrapper(UserPageContainer)} title="用户" />
-                        <Scene key="user_topic" component={pageWrapper(UserTopicPageContainer)} title="用户话题" />
+                        <Scene key="discovery_tab" component={DiscoveryTabPageContainer} title="Wetoo" />
+                        <Scene key="topic" component={TopicPageContainer} title="阅读话题" />
+                        <Scene key="user" component={UserPageContainer} title="用户" />
+                        <Scene key="user_topic" component={UserTopicPageContainer} title="用户话题" />
                     </Scene>
                 </RouterWithRedux>
             </Provider>

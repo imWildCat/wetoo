@@ -1,0 +1,5 @@
+{
+  "globalDependencies": {
+    "react-native": "registry:dt/react-native#0.29.0+20160709063508"
+  }
+}

@@ -1,11 +1,12 @@
 import React, {Component, PropTypes} from 'react';
-import {ScrollView, StyleSheet, View, Image, Text, ActivityIndicator} from 'react-native';
+import {ScrollView, StyleSheet, View, Image, Text, ActivityIndicator, InteractionManager} from 'react-native';
 import cheerio from 'cheerio';
 
 import StringUtilities from '../../../utilities/string';
 import ImageUtilities from '../../../utilities/image';
 import HTMLHelper from '../../../utilities/html_helper';
 
+import PageContainer from '../../common/PageContainer';
 import MetaInfo from './MetaInfo';
 import UserInfoRow from './UserInfoRow';
 
@@ -19,14 +20,18 @@ class UserPage extends Component {
     }
 
     componentDidMount() {
-        this._loadUser();
+        InteractionManager.runAfterInteractions(() => {
+            this._loadUser();
+        });
     }
 
     render() {
         return (
-            <ScrollView style={styles.container}>
-                {this._renderContent()}
-            </ScrollView>
+            <PageContainer>
+                <ScrollView style={styles.container}>
+                    {this._renderContent()}
+                </ScrollView>
+            </PageContainer>
         );
     }
 

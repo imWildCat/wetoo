@@ -3,6 +3,8 @@ import {StyleSheet, View, Text, ListView, TouchableHighlight} from 'react-native
 
 import V2Networking from '../../../utilities/v2_networking';
 import StringUtilities from '../../../utilities/string';
+
+import PageContainer from '../../common/PageContainer';
 import LoadingWrapper from '../../common/LoadingWrapper';
 import Separator from '../../common/Separator';
 import PointSeparator from '../../common/PointSeparator';
@@ -34,10 +36,12 @@ class UserTopicPage extends Component {
 
     _renderList() {
         return (
-            <ListView
-                dataSource={this.state.dataSource}
-                renderRow={this._renderRow.bind(this)}
-                />
+            <PageContainer>
+                <ListView
+                   dataSource={this.state.dataSource}
+                    renderRow={this._renderRow.bind(this)}
+                   />
+            </PageContainer>
         );
     }
 
