@@ -2,13 +2,12 @@ import React, {PropTypes} from 'react';
 import {
   Image,
   Dimensions,
-  Platform,
 } from 'react-native';
 
 const {width: screenWidth} = Dimensions.get('window');
 
 var baseStyle = {
-  backgroundColor: 'transparent',
+  backgroundColor: 'red',
 };
 
 var ResizableImage = React.createClass({
@@ -19,31 +18,30 @@ var ResizableImage = React.createClass({
     };
   },
   componentDidMount: function () {
-    //avoid repaint if width/height is given
     if (this.props.style.width || this.props.style.height) {
       return;
     }
     Image.getSize(this.props.source.uri, (w, h) => {
+      console.log(`Image[${this.props.source.uri}]: width:`, w, 'height:', h);
       this.setState({ width: w, height: h });
     });
-
   },
   render: function () {
     var finalSize = {};
-    const maxImageWidth = this.props.maxWidth || screenWidth;
-    console.log({ maxImageWidth, });
+    const maxImageWidth = Math.floor(this.props.maxWidth || screenWidth);
     if (this.state.width > maxImageWidth) {
       finalSize.width = maxImageWidth;
       var ratio = this.state.width / this.state.height;
       console.log({ ratio });
       finalSize.height = Math.floor(maxImageWidth / ratio);
+      console.log('finalSize:', finalSize);
     }
     var style = Object.assign(baseStyle, this.props.style, this.state, finalSize);
     var source = Object.assign({}, this.props.source, this.state);
-    console.log({ style, source });
 
     return (
       <Image
+        key={`image_${this.props.uri}_w[${this.state.width}]_h[${this.state.height}]`}
         resizeMode="cover"
         style={style}
         source={source} />

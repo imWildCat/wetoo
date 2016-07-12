@@ -111,8 +111,8 @@ const styles = StyleSheet.create({
     titleText: {
         color: '#333333',
         fontSize: 15,
-        paddingLeft: 12,
-        paddingRight: 12,
+        marginLeft: 12,
+        marginRight: 12,
     },
     metaInfo: {
         height: 17,
