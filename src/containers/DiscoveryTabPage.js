@@ -1,23 +1,22 @@
-import { connect } from 'react-redux';
-import { Actions } from 'react-native-router-flux';
+import {connect} from 'react-redux';
+import {Actions} from 'react-native-router-flux';
 
 import DiscoveryTabPage from '../components/pages/DiscoveryTab';
-import { navigatePush } from '../actions';
+import {navigatePush} from '../actions';
 
 const mapStateToProps = (state) => {
-    return {
-    };
+  return {};
 };
 
 const mapDispatchToProps = (dispatch) => {
-    return {
-        pushTopicPage: (topicID) => {
-            Actions.topic({ topicID });
-        },
-    };
+  return {
+    pushTopicPage: (topicID) => {
+      Actions.topic({ topicID });
+    },
+  };
 };
 
 export default connect(
-    mapStateToProps,
-    mapDispatchToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(DiscoveryTabPage);

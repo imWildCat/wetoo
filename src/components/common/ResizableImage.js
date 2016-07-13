@@ -4,7 +4,7 @@ import {
   Dimensions,
 } from 'react-native';
 
-const {width: screenWidth} = Dimensions.get('window');
+const { width: screenWidth } = Dimensions.get('window');
 
 var baseStyle = {
   backgroundColor: 'red',
@@ -22,7 +22,7 @@ var ResizableImage = React.createClass({
       return;
     }
     Image.getSize(this.props.source.uri, (w, h) => {
-      console.log(`Image[${this.props.source.uri}]: width:`, w, 'height:', h);
+      // console.log(`Image[${this.props.source.uri}]: width:`, w, 'height:', h);
       this.setState({ width: w, height: h });
     });
   },
@@ -32,9 +32,9 @@ var ResizableImage = React.createClass({
     if (this.state.width > maxImageWidth) {
       finalSize.width = maxImageWidth;
       var ratio = this.state.width / this.state.height;
-      console.log({ ratio });
+      // console.log({ ratio });
       finalSize.height = Math.floor(maxImageWidth / ratio);
-      console.log('finalSize:', finalSize);
+      // console.log('finalSize:', finalSize);
     }
     var style = Object.assign(baseStyle, this.props.style, this.state, finalSize);
     var source = Object.assign({}, this.props.source, this.state);
@@ -44,7 +44,7 @@ var ResizableImage = React.createClass({
         key={`image_${this.props.uri}_w[${this.state.width}]_h[${this.state.height}]`}
         resizeMode="cover"
         style={style}
-        source={source} />
+        source={source}/>
     );
   }
 });

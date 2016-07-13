@@ -1,8 +1,8 @@
-import { combineReducers } from 'redux';
+import {combineReducers} from 'redux';
 import navigationState from './navigations';
 
 const appReducers = combineReducers({
-    navigationState,
+  navigationState,
 });
 
 export default appReducers;

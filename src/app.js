@@ -5,9 +5,9 @@ moment.locale('zh-cn');
 import App from './containers/App';
 
 export default class Application extends Component {
-	render() {
-		return (
-			<App />
-		);
-	}
+  render() {
+    return (
+      <App />
+    );
+  }
 }
