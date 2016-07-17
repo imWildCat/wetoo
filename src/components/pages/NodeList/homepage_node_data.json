@@ -1,0 +1,547 @@
+[
+  {
+    "category_name": "分享与探索",
+    "nodes": [
+      {
+        "name": "问与答",
+        "slug": "qna"
+      },
+      {
+        "name": "分享发现",
+        "slug": "share"
+      },
+      {
+        "name": "分享创造",
+        "slug": "create"
+      },
+      {
+        "name": "分享邀请码",
+        "slug": "in"
+      },
+      {
+        "name": "自言自语",
+        "slug": "autistic"
+      },
+      {
+        "name": "奇思妙想",
+        "slug": "ideas"
+      },
+      {
+        "name": "随想",
+        "slug": "random"
+      },
+      {
+        "name": "设计",
+        "slug": "design"
+      },
+      {
+        "name": "Blog",
+        "slug": "blog"
+      }
+    ]
+  },
+  {
+    "category_name": "V2EX",
+    "nodes": [
+      {
+        "name": "V2EX",
+        "slug": "v2ex"
+      },
+      {
+        "name": "Project Babel",
+        "slug": "babel"
+      },
+      {
+        "name": "DNS",
+        "slug": "dns"
+      },
+      {
+        "name": "反馈",
+        "slug": "feedback"
+      },
+      {
+        "name": "Google App Engine",
+        "slug": "gae"
+      },
+      {
+        "name": "使用指南",
+        "slug": "guide"
+      }
+    ]
+  },
+  {
+    "category_name": "iOS",
+    "nodes": [
+      {
+        "name": "iDev",
+        "slug": "idev"
+      },
+      {
+        "name": "iCode",
+        "slug": "icode"
+      },
+      {
+        "name": "iMarketing",
+        "slug": "imarketing"
+      },
+      {
+        "name": "iAd",
+        "slug": "iad"
+      },
+      {
+        "name": "iTransfer",
+        "slug": "itransfer"
+      }
+    ]
+  },
+  {
+    "category_name": "Geek",
+    "nodes": [
+      {
+        "name": "程序员",
+        "slug": "programmer"
+      },
+      {
+        "name": "Python",
+        "slug": "python"
+      },
+      {
+        "name": "Android",
+        "slug": "android"
+      },
+      {
+        "name": "Linux",
+        "slug": "linux"
+      },
+      {
+        "name": "PHP",
+        "slug": "php"
+      },
+      {
+        "name": "宽带症候群",
+        "slug": "bb"
+      },
+      {
+        "name": "云计算",
+        "slug": "cloud"
+      },
+      {
+        "name": "外包",
+        "slug": "outsourcing"
+      },
+      {
+        "name": "硬件",
+        "slug": "hardware"
+      },
+      {
+        "name": "服务器",
+        "slug": "server"
+      },
+      {
+        "name": "Java",
+        "slug": "java"
+      },
+      {
+        "name": "Bitcoin",
+        "slug": "bitcoin"
+      },
+      {
+        "name": "MySQL",
+        "slug": "mysql"
+      },
+      {
+        "name": "Linode",
+        "slug": "linode"
+      },
+      {
+        "name": "设计师",
+        "slug": "designer"
+      },
+      {
+        "name": "编程",
+        "slug": "programming"
+      },
+      {
+        "name": "Kindle",
+        "slug": "kindle"
+      },
+      {
+        "name": "Markdown",
+        "slug": "markdown"
+      },
+      {
+        "name": "汽车",
+        "slug": "car"
+      },
+      {
+        "name": "Tornado",
+        "slug": "tornado"
+      },
+      {
+        "name": "Ruby on Rails",
+        "slug": "ror"
+      },
+      {
+        "name": "MongoDB",
+        "slug": "mongodb"
+      },
+      {
+        "name": "字体排印",
+        "slug": "typography"
+      },
+      {
+        "name": "Redis",
+        "slug": "redis"
+      },
+      {
+        "name": "Ruby",
+        "slug": "ruby"
+      },
+      {
+        "name": "商业模式",
+        "slug": "business"
+      },
+      {
+        "name": "数学",
+        "slug": "math"
+      },
+      {
+        "name": "Photoshop",
+        "slug": "photoshop"
+      },
+      {
+        "name": "LEGO",
+        "slug": "lego"
+      },
+      {
+        "name": "SONY",
+        "slug": "sony"
+      },
+      {
+        "name": "自然语言处理",
+        "slug": "nlp"
+      }
+    ]
+  },
+  {
+    "category_name": "游戏",
+    "nodes": [
+      {
+        "name": "游戏",
+        "slug": "games"
+      },
+      {
+        "name": "Steam",
+        "slug": "steam"
+      },
+      {
+        "name": "iGame",
+        "slug": "igame"
+      },
+      {
+        "name": "英雄联盟",
+        "slug": "lol"
+      },
+      {
+        "name": "PlayStation 4",
+        "slug": "ps4"
+      },
+      {
+        "name": "Battlefield 3",
+        "slug": "bf3"
+      },
+      {
+        "name": "StarCraft 2",
+        "slug": "sc2"
+      },
+      {
+        "name": "PlayStation 3",
+        "slug": "ps3"
+      },
+      {
+        "name": "World of Warcraft",
+        "slug": "wow"
+      },
+      {
+        "name": "EVE",
+        "slug": "eve"
+      },
+      {
+        "name": "Xbox 360",
+        "slug": "xbox360"
+      },
+      {
+        "name": "Battlefield 4",
+        "slug": "bf4"
+      },
+      {
+        "name": "Gran Turismo",
+        "slug": "gt"
+      },
+      {
+        "name": "Wii",
+        "slug": "wii"
+      }
+    ]
+  },
+  {
+    "category_name": "Apple",
+    "nodes": [
+      {
+        "name": "macOS",
+        "slug": "macos"
+      },
+      {
+        "name": "iPhone",
+        "slug": "iphone"
+      },
+      {
+        "name": "MacBook Pro",
+        "slug": "mbp"
+      },
+      {
+        "name": "iPad",
+        "slug": "ipad"
+      },
+      {
+        "name": "MacBook Air",
+        "slug": "mba"
+      },
+      {
+        "name": "配件",
+        "slug": "accessory"
+      },
+      {
+        "name": "MacBook",
+        "slug": "macbook"
+      },
+      {
+        "name": "iMac",
+        "slug": "imac"
+      },
+      {
+        "name": "Mac mini",
+        "slug": "macmini"
+      },
+      {
+        "name": "iPod",
+        "slug": "ipod"
+      },
+      {
+        "name": "Mac Pro",
+        "slug": "macpro"
+      },
+      {
+        "name": "MobileMe",
+        "slug": "mobileme"
+      },
+      {
+        "name": "iWork",
+        "slug": "iwork"
+      },
+      {
+        "name": "iLife",
+        "slug": "ilife"
+      },
+      {
+        "name": "GarageBand",
+        "slug": "garageband"
+      }
+    ]
+  },
+  {
+    "category_name": "生活",
+    "nodes": [
+      {
+        "name": "二手交易",
+        "slug": "all4all"
+      },
+      {
+        "name": "酷工作",
+        "slug": "jobs"
+      },
+      {
+        "name": "天黑以后",
+        "slug": "afterdark"
+      },
+      {
+        "name": "免费赠送",
+        "slug": "free"
+      },
+      {
+        "name": "音乐",
+        "slug": "music"
+      },
+      {
+        "name": "电影",
+        "slug": "movie"
+      },
+      {
+        "name": "物物交换",
+        "slug": "exchange"
+      },
+      {
+        "name": "剧集",
+        "slug": "tv"
+      },
+      {
+        "name": "信用卡",
+        "slug": "creditcard"
+      },
+      {
+        "name": "美酒与美食",
+        "slug": "taste"
+      },
+      {
+        "name": "投资",
+        "slug": "invest"
+      },
+      {
+        "name": "团购",
+        "slug": "tuan"
+      },
+      {
+        "name": "旅行",
+        "slug": "travel"
+      },
+      {
+        "name": "阅读",
+        "slug": "reading"
+      },
+      {
+        "name": "摄影",
+        "slug": "photograph"
+      },
+      {
+        "name": "绿茵场",
+        "slug": "soccer"
+      },
+      {
+        "name": "Baby",
+        "slug": "baby"
+      },
+      {
+        "name": "宠物",
+        "slug": "pet"
+      },
+      {
+        "name": "咖啡",
+        "slug": "coffee"
+      },
+      {
+        "name": "乐活",
+        "slug": "lohas"
+      },
+      {
+        "name": "骑行",
+        "slug": "bike"
+      },
+      {
+        "name": "日记",
+        "slug": "diary"
+      },
+      {
+        "name": "非诚勿扰",
+        "slug": "love"
+      },
+      {
+        "name": "植物",
+        "slug": "plant"
+      },
+      {
+        "name": "蘑菇",
+        "slug": "mushroom"
+      },
+      {
+        "name": "行程控",
+        "slug": "mileage"
+      }
+    ]
+  },
+  {
+    "category_name": "Internet",
+    "nodes": [
+      {
+        "name": "Google",
+        "slug": "google"
+      },
+      {
+        "name": "Twitter",
+        "slug": "twitter"
+      },
+      {
+        "name": "Coding",
+        "slug": "coding"
+      },
+      {
+        "name": "Facebook",
+        "slug": "facebook"
+      },
+      {
+        "name": "Wikipedia",
+        "slug": "wikipedia"
+      },
+      {
+        "name": "reddit",
+        "slug": "reddit"
+      }
+    ]
+  },
+  {
+    "category_name": "城市",
+    "nodes": [
+      {
+        "name": "北京",
+        "slug": "beijing"
+      },
+      {
+        "name": "上海",
+        "slug": "shanghai"
+      },
+      {
+        "name": "深圳",
+        "slug": "shenzhen"
+      },
+      {
+        "name": "杭州",
+        "slug": "hangzhou"
+      },
+      {
+        "name": "广州",
+        "slug": "guangzhou"
+      },
+      {
+        "name": "成都",
+        "slug": "chengdu"
+      },
+      {
+        "name": "武汉",
+        "slug": "wuhan"
+      },
+      {
+        "name": "昆明",
+        "slug": "kunming"
+      },
+      {
+        "name": "天津",
+        "slug": "tianjin"
+      },
+      {
+        "name": "New York",
+        "slug": "nyc"
+      },
+      {
+        "name": "San Francisco",
+        "slug": "sanfrancisco"
+      },
+      {
+        "name": "青岛",
+        "slug": "qingdao"
+      },
+      {
+        "name": "Los Angeles",
+        "slug": "la"
+      }
+    ]
+  }
+]
