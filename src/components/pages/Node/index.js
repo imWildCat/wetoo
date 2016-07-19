@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 
 import Style from '../../../utilities/style';
-import TopicList from '../TopicList';
+import TopicList from '../../common/TopicList';
 import PageContainer from '../../common/PageContainer';
 
 class NodePage extends Component {

@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {View, Text, Image, StyleSheet, TouchableHighlight} from 'react-native';
 
-import PointSeparator from '../../common/PointSeparator';
+import PointSeparator from '../PointSeparator';
 import ReplyCount from './ReplyCount';
 
 class TopicListRow extends Component {

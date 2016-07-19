@@ -8,7 +8,7 @@ import PageContainer from '../../common/PageContainer';
 import LoadingWrapper from '../../common/LoadingWrapper';
 import Separator from '../../common/Separator';
 import PointSeparator from '../../common/PointSeparator';
-import ReplyCount from '../TopicList/ReplyCount';
+import ReplyCount from '../../common/TopicList/ReplyCount';
 
 class UserTopicPage extends Component {
 
