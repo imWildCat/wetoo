@@ -1,9 +1,9 @@
 import React, {Component, PropTypes} from 'react';
-import { View, StyleSheet} from 'react-native';
+import {View, StyleSheet} from 'react-native';
 import ViewPager from 'react-native-viewpager';
 
 import PageContainer from '../../common/PageContainer';
-import TopicList from '../TopicList';
+import TopicList from '../../common/TopicList';
 import SegmentedControl from './SegmentedControl';
 
 const tabData = [
@@ -64,11 +64,15 @@ class DiscoveryTabPage extends Component {
     return (
       <PageContainer isTab={true}>
         <SegmentedControl buttonTitles={titles}
-          ref={(ref) => { this.segmentedControl = ref; }}
-          onPress={this.onSegmentedControlButtonPress.bind(this)}
-          style={styles.segmentedControl} />
+                          ref={(ref) => {
+                            this.segmentedControl = ref;
+                          }}
+                          onPress={this.onSegmentedControlButtonPress.bind(this)}
+                          style={styles.segmentedControl}/>
         <ViewPager
-          ref={(ref) => { this.viewPager = ref; }}
+          ref={(ref) => {
+            this.viewPager = ref;
+          }}
           style={{ flex: 1 }}
           dataSource={this.state.dataSource}
           renderPage={this._renderPage.bind(this)}
@@ -76,7 +80,7 @@ class DiscoveryTabPage extends Component {
           isLoop={false}
           autoPlay={false}
           renderPageIndicator={false}
-          />
+        />
       </PageContainer>
     );
   }
@@ -85,15 +89,16 @@ class DiscoveryTabPage extends Component {
     return (
       <TopicList
         key={`tab_slug_${data.slug}`}
-        slug={data.slug} />
+        slug={data.slug}/>
     );
   }
 
   _onChangePage(i) {
-    if (this.currentIndex !== i) {
-      this.currentIndex = i;
-      this.segmentedControl.setIndex(i);
-    }
+    // if (this.currentIndex !== i) {
+    //   this.currentIndex = i;
+    console.log('_onChangePage');
+    this.segmentedControl.setIndex(i);
+    // }
   }
 }
 
