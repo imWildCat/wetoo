@@ -94,11 +94,7 @@ class DiscoveryTabPage extends Component {
   }
 
   _onChangePage(i) {
-    // if (this.currentIndex !== i) {
-    //   this.currentIndex = i;
-    console.log('_onChangePage');
     this.segmentedControl.setIndex(i);
-    // }
   }
 }
 

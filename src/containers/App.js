@@ -9,6 +9,8 @@ import Style from '../utilities/style';
 
 import TabIcon from '../components/common/TabIcon';
 import DiscoveryTabPageContainer from './DiscoveryTabPage';
+import NotificationTabPage from '../components/pages/NotificationTab';
+import MeTab from '../components/pages/MeTab';
 import TopicPageContainer from './TopicPage';
 import UserPageContainer from './UserPage';
 import UserTopicPageContainer from './UserTopicPage';
@@ -46,13 +48,13 @@ class App extends Component {
                      navigationBarStyle={styles.navigationBarStyle}
                      icon={TabIcon}/>
               <Scene key="notification"
-                     component={NodeListPage}
+                     component={NotificationTabPage}
                      title="通知"
                      titleStyle={styles.titleStyle}
                      navigationBarStyle={styles.navigationBarStyle}
                      icon={TabIcon}/>
               <Scene key="me"
-                     component={NodeListPage}
+                     component={MeTab}
                      title="我"
                      titleStyle={styles.titleStyle}
                      navigationBarStyle={styles.navigationBarStyle}
