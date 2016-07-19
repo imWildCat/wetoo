@@ -62,7 +62,7 @@ class DiscoveryTabPage extends Component {
     const titles = this.segmentedControlTitles;
 
     return (
-      <PageContainer>
+      <PageContainer isTab={true}>
         <SegmentedControl buttonTitles={titles}
           ref={(ref) => { this.segmentedControl = ref; }}
           onPress={this.onSegmentedControlButtonPress.bind(this)}
@@ -85,8 +85,7 @@ class DiscoveryTabPage extends Component {
     return (
       <TopicList
         key={`tab_slug_${data.slug}`}
-        pushTopicPage={this.props.pushTopicPage}
-        tabSlug={data.slug} />
+        slug={data.slug} />
     );
   }
 
@@ -97,10 +96,6 @@ class DiscoveryTabPage extends Component {
     }
   }
 }
-
-DiscoveryTabPage.propTypes = {
-  pushTopicPage: PropTypes.func.isRequired,
-};
 
 const styles = StyleSheet.create({
   segmentedControl: {

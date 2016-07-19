@@ -1,12 +1,11 @@
 import React, {Component} from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
+import {Actions} from 'react-native-router-flux';
 
 import HomepageNodeData from './homepage_node_data.json';
 import Style from '../../../utilities/style';
 import GiftedListView from '../../common/GiftedListView';
 import PageContainer from '../../common/PageContainer';
-
-console.log(HomepageNodeData);
 
 class NodeList extends Component {
 
@@ -21,9 +20,8 @@ class NodeList extends Component {
 
   render() {
     return (
-      <PageContainer>
+      <PageContainer isTab={true}>
         <GiftedListView
-          style={{flex: 1}}
           onFetch={this.onFetch}
           renderRow={this.renderRow}
           pagination={false}
@@ -42,13 +40,11 @@ class NodeList extends Component {
     console.log(nodes);
     return (
       <View style={styles.row}>
-        <View style={styles.rowWrapper}>
-          <View style={styles.nodeCategoryWrapper}>
-            <Text style={styles.nodeCategory}> {categoryName}</Text>
-          </View>
-          <View style={styles.nodeContainer}>
-            {nodes.map((node) => this.renderNodeElement(node))}
-          </View>
+        <View style={styles.nodeCategoryWrapper}>
+          <Text style={styles.nodeCategory}> {categoryName}</Text>
+        </View>
+        <View style={styles.nodeContainer}>
+          {nodes.map((node) => this.renderNodeElement(node))}
         </View>
       </View>
     );
@@ -58,11 +54,15 @@ class NodeList extends Component {
     const { slug, name } = node;
     return (
       <View key={slug} style={styles.nodeWrapper}>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => this.onNodePress(slug, name)}>
           <Text style={styles.nodeText}>{name}</Text>
         </TouchableOpacity>
       </View>
     );
+  }
+
+  onNodePress(slug, name) {
+    Actions.node({slug, title: name});
   }
 
 }
@@ -70,9 +70,6 @@ class NodeList extends Component {
 const styles = Style.create({
   row: {
     overflow: 'hidden',
-  },
-  rowWrapper: {
-    flex: 1,
   },
   nodeCategoryWrapper: {
     height: 39,

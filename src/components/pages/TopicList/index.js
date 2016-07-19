@@ -1,5 +1,6 @@
 import React, {Component, PropTypes} from 'react';
-import { View, ListView, StatusBar, ActivityIndicator, InteractionManager } from 'react-native';
+import {View, ListView, StatusBar, ActivityIndicator, InteractionManager} from 'react-native';
+import {Actions} from 'react-native-router-flux';
 
 import cheerio from 'cheerio';
 import moment from 'moment';
@@ -10,6 +11,15 @@ import V2Networking from '../../../utilities/v2_networking';
 import TopicListRow from './TopicListRow';
 
 class TopicListPage extends Component {
+
+  static defaultProps = {
+    isNode: false,
+  };
+
+  static propTypes = {
+    slug: PropTypes.string.isRequired,
+    isNode: PropTypes.bool,
+  };
 
   constructor(props) {
     super(props);
@@ -31,19 +41,12 @@ class TopicListPage extends Component {
   }
 
   loadList() {
-    const tabSlug = this.props.tabSlug || 'all';
-    console.log('fetching:', `http://www.v2ex.com/?tab=${tabSlug}`);
-    fetch(`http://www.v2ex.com/?tab=${tabSlug}`, {
-      headers: {
-        // 'Accept': '*/*',
-        // 'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.112 Safari/537.36'
-      }
-    })
-      .then(response => response.text())
-      .then(text => {
-        const $ = cheerio.load(text);
-
-        const topicElements = $('#Main > div.box > div.cell.item');
+    const {slug, isNode} = this.props;
+    const uri = isNode ? `go/${slug}` : `?tab=${slug}`;
+    console.log('uri:', uri);
+    V2Networking.get(uri)
+      .then($ => {
+        const topicElements = $('#Main > div.box > div.cell.item, #Main > div.box > #TopicsNode > .cell');
         const topicList = [];
 
         for (var index = 0; index < topicElements.length; index++) {
@@ -66,7 +69,19 @@ class TopicListPage extends Component {
           }
           const timestamp = this.parseTimeToUnix(time);
 
-          topicList.push({ id, title, nodeName, nodeURI, authorName, authorURI, authorAvatarURI, replyCount, time, timestamp, pinned });
+          topicList.push({
+            id,
+            title,
+            nodeName,
+            nodeURI,
+            authorName,
+            authorURI,
+            authorAvatarURI,
+            replyCount,
+            time,
+            timestamp,
+            pinned
+          });
         }
 
         // It might not need sorting now:
@@ -103,7 +118,7 @@ class TopicListPage extends Component {
   render() {
     return (
       <View style={{ flex: 1 }}>
-        <StatusBar barStyle={'light-content'} />
+        <StatusBar barStyle={'light-content'}/>
         {this._renderContent()}
       </View>
     );
@@ -116,7 +131,7 @@ class TopicListPage extends Component {
           style={{ flex: 1 }}
           dataSource={this.state.dataSource}
           renderRow={this.renderRow.bind(this)}
-          />
+        />
       );
     } else {
       return <ActivityIndicator />;
@@ -124,20 +139,16 @@ class TopicListPage extends Component {
   }
 
   renderRow(rowData) {
+    const {isNode} = this.props;
     return (
-      <TopicListRow onRowPress={this.onRowPress.bind(this)} {...rowData} />
+      <TopicListRow isNode={isNode} onRowPress={this.onRowPress.bind(this)} {...rowData} />
     );
   }
 
   onRowPress(topicID) {
-    this.props.pushTopicPage(topicID);
+    Actions.topic({topicID});
   }
 
 }
-
-TopicListPage.propTypes = {
-  pushTopicPage: PropTypes.func.isRequired,
-  tabSlug: PropTypes.string,
-};
 
 export default TopicListPage;

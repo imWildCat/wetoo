@@ -14,6 +14,7 @@ import UserPageContainer from './UserPage';
 import UserTopicPageContainer from './UserTopicPage';
 
 import NodeListPage from '../components/pages/NodeList';
+import NodePage from '../components/pages/Node';
 
 const store = configureStore();
 
@@ -29,7 +30,7 @@ class App extends Component {
             key="root"
             titleStyle={styles.titleStyle}
             navigationBarStyle={styles.navigationBarStyle}>
-            <Scene key="tabbar" tabs={true} tabBarStyle={styles.tabBar} 
+            <Scene key="tabbar" tabs={true} tabBarStyle={styles.tabBar}
                    navigationBarStyle={styles.navigationBarStyle}>
               <Scene key="discovery"
                      component={DiscoveryTabPageContainer}
@@ -60,6 +61,7 @@ class App extends Component {
             <Scene key="topic" component={TopicPageContainer} title="阅读话题"/>
             <Scene key="user" component={UserPageContainer} title="用户"/>
             <Scene key="user_topic" component={UserTopicPageContainer} title="用户话题"/>
+            <Scene key="node" component={NodePage} title="节点" />
           </Scene>
         </RouterWithRedux>
       </Provider>

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { View, Text, Image, StyleSheet, TouchableHighlight } from 'react-native';
+import {View, Text, Image, StyleSheet, TouchableHighlight} from 'react-native';
 
 import PointSeparator from '../../common/PointSeparator';
 import ReplyCount from './ReplyCount';
@@ -7,28 +7,35 @@ import ReplyCount from './ReplyCount';
 class TopicListRow extends Component {
 
   render() {
-    const { id, title, nodeName, /*nodeURI,*/ authorName, /*authorURI,*/ replyCount, authorAvatarURI, /*time, timestamp, pinned,*/ onRowPress } = this.props;
+    const { id, title, nodeName, /*nodeURI,*/ authorName, /*authorURI,*/ replyCount, authorAvatarURI, /*time, timestamp, pinned,*/ onRowPress, isNode } = this.props;
+
+    let nodeView = null;
+    if (!isNode) {
+      nodeView = <View style={styles.nodeView}>
+        <PointSeparator style={styles.pointSeparator}/>
+        <View style={styles.nodeNameWrapper}>
+          <Text style={styles.nodeName}>{nodeName}</Text>
+        </View>
+      </View>;
+    }
 
     return (
       <TouchableHighlight underlayColor="#E6E6E6" onPress={() => onRowPress(id)} style={{ overflow: 'hidden' }}>
         <View style={styles.rowContainer}>
           <View style={styles.rowInnerContainer}>
-            <Image style={styles.avatarImage} source={{ uri: `https:${authorAvatarURI}` }} />
+            <Image style={styles.avatarImage} source={{ uri: `https:${authorAvatarURI}` }}/>
             <View style={styles.infoContainer}>
               <Text style={styles.titleText}>{title}</Text>
               <View style={styles.metaContainer}>
                 <Text style={styles.authorName}>{this.renderAuthorName(authorName)}</Text>
-                <PointSeparator style={styles.pointSeparator} />
-                <View style={styles.nodeNameWrapper}>
-                  <Text style={styles.nodeName}>{nodeName}</Text>
-                </View>
+                {nodeView}
                 <View style={styles.replyCountLayout}>
-                  <ReplyCount count={replyCount} />
+                  <ReplyCount count={replyCount}/>
                 </View>
               </View>
             </View>
           </View>
-          <View style={styles.rowSeparator} />
+          <View style={styles.rowSeparator}/>
         </View>
       </TouchableHighlight>
     );
@@ -83,6 +90,9 @@ const styles = StyleSheet.create({
     margin: 5,
     marginTop: 6,
     marginBottom: 0,
+  },
+  nodeView: {
+    flexDirection: 'row',
   },
   nodeNameWrapper: {
     backgroundColor: '#E8F0FC',
