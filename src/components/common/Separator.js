@@ -13,7 +13,7 @@ class Separator extends Component {
       style = [style, { marginLeft }];
     }
     return (
-      <View style={style}/>
+      <View style={style} />
     );
   }
 }

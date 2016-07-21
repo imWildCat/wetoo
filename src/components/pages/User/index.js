@@ -48,14 +48,17 @@ class UserPage extends Component {
         <View>
           <View style={styles.primaryInfoContainer}>
             <View style={styles.primaryInfoInnerContainer}>
-              <Image style={styles.avatarImage} source={{ uri: avatarURL }}/>
+              <Image style={styles.avatarImage} source={{ uri: avatarURL }} />
               <MetaInfo {...this.state} />
             </View>
             {this._renderSignatureCompanyPosition(signature, company, position)}
           </View>
           <View style={styles.sectionGroup}>
-            <UserInfoRow text="话题" rowType="topic" onPress={() => { this.props.pushUserTopicPage(username); }}/>
-            <UserInfoRow text="回复" rowType="reply" onPress={() => {}}/>
+            <UserInfoRow text="话题" rowType="topic" onPress={() => {
+              this.props.pushUserTopicPage(username);
+            }} />
+            <UserInfoRow text="回复" rowType="reply" onPress={() => {
+            }} />
           </View>
         </View>
       );
@@ -77,7 +80,7 @@ class UserPage extends Component {
 
   _loadUser() {
     const { username } = this.props.username;
-    V2Networking.get(`https://www.v2ex.com/member/${username}`)
+    V2Networking.get(`member/${username}`)
       .then($ => {
 
         const username = $('#Main .box .cell table tr td h1').text();

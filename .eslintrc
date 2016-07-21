@@ -368,6 +368,7 @@
     ],
     "react/jsx-curly-spacing": 2,
     "react-native/no-unused-styles": 2,
+    "react/jsx-space-before-closing": 2,
     "react-native/split-platform-components": 2,
     "prefer-template": 1,
     "template-curly-spacing": 1
