@@ -5,6 +5,7 @@ import Button from 'react-native-button';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 import Networking from '../../../utilities/v2_networking';
+import SessionManager from '../../../utilities/session_manager';
 import Style from '../../../utilities/style';
 
 const CLOSE_BUTTON_SIZE = 27;
@@ -16,7 +17,7 @@ class LoginPage extends Component {
     password: null,
     isInfoWrong: false,
     isLoading: false,
-    errorText: null,
+    errorMessage: null,
   };
 
   constructor(props) {
@@ -27,8 +28,12 @@ class LoginPage extends Component {
     this.onSubmitButtonPress = this.onSubmitButtonPress.bind(this);
   }
 
+  componentDidMount() {
+    this.getPostToken();
+  }
+
   render() {
-    const { username, password, isInfoWrong, isLoading, errorText } = this.state;
+    const { username, password, isInfoWrong, isLoading, errorMessage } = this.state;
 
     return (
       <View style={styles.container}>
@@ -62,7 +67,7 @@ class LoginPage extends Component {
         </View>
 
         <View style={styles.loginFeedbackWrapper}>
-          <Text style={styles.loginFeedbackText}>{errorText}</Text>
+          <Text style={styles.loginFeedbackText}>{errorMessage}</Text>
         </View>
 
         <Button onPress={this.onSubmitButtonPress}
@@ -85,23 +90,74 @@ class LoginPage extends Component {
 
   onSubmitButtonPress() {
     const { isLoading, username, password } = this.state;
+    if (!username || !password || username.length === 0 || password.length === 0) {
+      return;
+    }
     if (!isLoading) {
       this.refs['usernameField'].blur();
       this.refs['passwordField'].blur();
 
-      this.setState({ isLoading: true });
+      this.setState({ isLoading: true, errorMessage: null, });
 
-
+      if (!this.postToken) {
+        this.getPostToken().then(() => this.performLogin());
+      } else {
+        this.performLogin();
+      }
     }
   }
 
   async getPostToken() {
     try {
       let $ = await Networking.get('/signin');
+      const usernameFieldName = $('input[placeholder="用户名或电子邮箱地址"]').attr('name');
+      const passwordFieldName = $('input[type="password"]').attr('name');
+      const once = $('input[name="once"]').attr('value');
+      const postToken = { usernameFieldName, passwordFieldName, once };
+      this.postToken = postToken;
+      return postToken;
+    } catch (error) {
+      console.log('error when getting post token:', error);
+    }
+  }
+
+
+  async performLogin() {
+    try {
+      const { username, password } = this.state;
+      const { usernameFieldName, passwordFieldName, once } = this.postToken;
+      const data = { once, next: '/' };
+      data[usernameFieldName] = username;
+      data[passwordFieldName] = password;
+      console.log('login data:', data);
+
+      let $ = await Networking.post('/signin', data, { 'Referer': 'https://www.v2ex.com/signin' });
+      const problemMessage = $('.problem').text();
+      if (problemMessage && problemMessage.length > 0) {
+        this.cancelLogin(problemMessage.replace('请解决以下问题然后再提交：', ''));
+      } else {
+        SessionManager.setCurrentUser($);
+        const user = SessionManager.getCurrentUser();
+        if (user) {
+          this.loginSucceed();
+        } else {
+          this.cancelLogin('未知错误，请重试或联系开发者');
+        }
+      }
 
     } catch (error) {
-      
+      this.cancelLogin('网络错误，请重试');
     }
+
+  }
+
+  cancelLogin(errorMessage = null) {
+    this.postToken = null;
+    this.setState({ isLoading: false, errorMessage });
+  }
+
+  loginSucceed() {
+    Actions.pop();
   }
 
 }
