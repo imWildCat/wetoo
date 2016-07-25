@@ -6,7 +6,7 @@ const V2Networking = {
   },
   request: (method, uri, otherConfig = {}) => {
     // TODO: Check user's setting for http/https
-    return fetch(`https://www.v2ex.com/${uri}`, {
+    return fetch(`https://www.v2ex.com${uri}`, {
       method: method,
       headers: {
         'Accept': 'text/html',

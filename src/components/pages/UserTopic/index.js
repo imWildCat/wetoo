@@ -70,7 +70,7 @@ class UserTopicPage extends Component {
 
   _loadTopicList() {
     const { username } = this.props;
-    V2Networking.get(`member/${username}/topics`)
+    V2Networking.get(`/member/${username}/topics`)
       .then($ => {
         const _topicElements = $('#Main div.cell.item');
         const _topics = [];

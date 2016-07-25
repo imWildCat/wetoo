@@ -80,7 +80,7 @@ class UserPage extends Component {
 
   _loadUser() {
     const { username } = this.props.username;
-    V2Networking.get(`member/${username}`)
+    V2Networking.get(`/member/${username}`)
       .then($ => {
 
         const username = $('#Main .box .cell table tr td h1').text();

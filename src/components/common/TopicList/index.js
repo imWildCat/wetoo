@@ -42,7 +42,7 @@ class TopicListPage extends Component {
 
   loadList() {
     const {slug, isNode} = this.props;
-    const uri = isNode ? `go/${slug}` : `?tab=${slug}`;
+    const uri = isNode ? `/go/${slug}` : `?tab=${slug}`;
     console.log('uri:', uri);
     V2Networking.get(uri)
       .then($ => {
