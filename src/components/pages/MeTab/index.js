@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {View, Text, ScrollView, TouchableWithoutFeedback} from 'react-native';
+import {Actions} from 'react-native-router-flux';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 import Style from '../../../utilities/style';
@@ -43,7 +44,7 @@ class MeTab extends Component {
   }
 
   onLoginPress() {
-    console.log('log');
+    Actions.login();
   }
 
   onSettingPress() {

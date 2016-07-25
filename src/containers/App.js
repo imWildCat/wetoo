@@ -17,6 +17,7 @@ import UserTopicPageContainer from './UserTopicPage';
 
 import NodeListPage from '../components/pages/NodeList';
 import NodePage from '../components/pages/Node';
+import LoginPage from '../components/pages/Login';
 
 const store = configureStore();
 
@@ -40,30 +41,31 @@ class App extends Component {
                      navigationBarStyle={styles.navigationBarStyle}
                      icon={TabIcon}
                      initial={true}
-                     title="Wetoo"/>
+                     title="Wetoo" />
               <Scene key="nodeList"
                      component={NodeListPage}
                      title="节点"
                      titleStyle={styles.titleStyle}
                      navigationBarStyle={styles.navigationBarStyle}
-                     icon={TabIcon}/>
+                     icon={TabIcon} />
               <Scene key="notification"
                      component={NotificationTabPage}
                      title="通知"
                      titleStyle={styles.titleStyle}
                      navigationBarStyle={styles.navigationBarStyle}
-                     icon={TabIcon}/>
+                     icon={TabIcon} />
               <Scene key="me"
                      component={MeTab}
                      title="我"
                      titleStyle={styles.titleStyle}
                      navigationBarStyle={styles.navigationBarStyle}
-                     icon={TabIcon}/>
+                     icon={TabIcon} />
             </Scene>
-            <Scene key="topic" component={TopicPageContainer} title="阅读话题"/>
-            <Scene key="user" component={UserPageContainer} title="用户"/>
-            <Scene key="user_topic" component={UserTopicPageContainer} title="用户话题"/>
+            <Scene key="topic" component={TopicPageContainer} title="阅读话题" />
+            <Scene key="user" component={UserPageContainer} title="用户" />
+            <Scene key="user_topic" component={UserTopicPageContainer} title="用户话题" />
             <Scene key="node" component={NodePage} title="节点" />
+            <Scene key="login" component={LoginPage} direction="vertical" hideNavBar={true} />
           </Scene>
         </RouterWithRedux>
       </Provider>
