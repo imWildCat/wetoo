@@ -1,4 +1,5 @@
 import Networking from './v2_networking';
+//noinspection JSUnresolvedVariable
 import {EventEmitter} from 'events';
 import CookieManager from 'react-native-cookies';
 
@@ -24,7 +25,6 @@ export default class SessionManager {
   }
 
   static emitStatusChanged(user) {
-    console.log('emitStatusChanged:', user);
     sessionEmitter.emit('status', user);
   }
 
@@ -73,7 +73,7 @@ export default class SessionManager {
         if (err) {
           reject(err);
         } else {
-          this.emitStatusChanged(null);
+          this.setCurrentUser(null);
           resolve(res);
         }
       });
@@ -81,3 +81,5 @@ export default class SessionManager {
   }
 
 }
+
+window.SessionManager = SessionManager;
