@@ -2,11 +2,11 @@ import React, {Component, PropTypes} from 'react';
 import {View, ListView, StatusBar, ActivityIndicator, InteractionManager} from 'react-native';
 import {Actions} from 'react-native-router-flux';
 
-import cheerio from 'cheerio';
 import moment from 'moment';
 
 import StringUtilities from '../../../utilities/string';
 import V2Networking from '../../../utilities/v2_networking';
+import SessionManager from '../../../utilities/session_manager';
 
 import TopicListRow from './TopicListRow';
 
@@ -46,6 +46,9 @@ class TopicListPage extends Component {
     console.log('uri:', uri);
     V2Networking.get(uri)
       .then($ => {
+        // Handle session status firstly
+        SessionManager.setCurrentUser($);
+
         const topicElements = $('#Main > div.box > div.cell.item, #Main > div.box > #TopicsNode > .cell');
         const topicList = [];
 

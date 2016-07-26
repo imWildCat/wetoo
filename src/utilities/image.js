@@ -1,10 +1,8 @@
 const ImageUtilities = {
 
   handleImageURI: (uri) => {
-    if (uri.startsWith('//cdn.v2ex.co')) {
+    if (uri.indexOf('//') === 0) {
       return `https:${uri}`;
-    } else if (uri.startsWith('//')) {
-      return `http:${uri}`;
     }
     return uri;
   },

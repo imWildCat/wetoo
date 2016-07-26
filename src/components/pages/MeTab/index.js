@@ -3,43 +3,78 @@ import {View, Text, ScrollView, TouchableWithoutFeedback} from 'react-native';
 import {Actions} from 'react-native-router-flux';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
+import SessionManager from '../../../utilities/session_manager';
 import Style from '../../../utilities/style';
+import Networking from '../../../utilities/v2_networking';
 
 import PageContainer from '../../common/PageContainer';
 import ActionRow from './ActionRow';
+import AvatarImage from '../../common/AvatarImage';
 
 import SettingIcon from '../../assets/setting_icon.png';
 
 class MeTab extends Component {
-  static defaultProps = {};
-  static propTypes = {};
-  static state = {};
+  state = { user: null };
 
   constructor(props) {
     super(props);
 
     this.onLoginPress = this.onLoginPress.bind(this);
     this.onSettingPress = this.onSettingPress.bind(this);
+    this.renderLoggedIn = this.renderLoggedIn.bind(this);
+    this.renderNotLoggedIn = this.renderNotLoggedIn.bind(this);
+  }
+
+  componentDidMount() {
+    SessionManager.listenToStatusChanged((user) => this.loadCurrentUser(user));
+
+    this.loadCurrentUser(SessionManager.getCurrentUser());
   }
 
   render() {
     return (
       <PageContainer isTab={true}>
         <ScrollView style={styles.wrapper}>
-          <TouchableWithoutFeedback onPress={this.onLoginPress}>
-            <View style={styles.topBox}>
-              <View style={styles.emptyAvatar} />
-              <Text style={styles.usernameText}>尚未登录，请登录</Text>
-              <View style={styles.rightArrowContainer}>
-                <Icon style={styles.rightArrow} name="chevron-right" size={13} color="#CCCCDE" />
-              </View>
-            </View>
-          </TouchableWithoutFeedback>
-          <View style={styles.bottomBox}>
-            <ActionRow showSeparator={false} title="设置" onPress={this.onSettingPress} iconImage={SettingIcon} />
-          </View>
+          {!this.state.user ? this.renderNotLoggedIn() : this.renderLoggedIn()}
         </ScrollView>
       </PageContainer>
+    );
+  }
+
+  renderNotLoggedIn() {
+    return (
+      <View>
+        <TouchableWithoutFeedback onPress={this.onLoginPress}>
+          <View style={styles.topBox}>
+            <View style={styles.emptyAvatar} />
+            <Text style={styles.usernameText}>尚未登录，请登录</Text>
+            <View style={styles.rightArrowContainer}>
+              <Icon style={styles.rightArrow} name="chevron-right" size={13} color="#CCCCDE" />
+            </View>
+          </View>
+        </TouchableWithoutFeedback>
+        <View style={styles.bottomBox}>
+          <ActionRow showSeparator={false} title="设置" onPress={this.onSettingPress} iconImage={SettingIcon} />
+        </View>
+      </View>
+    );
+  }
+
+  renderLoggedIn() {
+    const {name, avatarURI} = this.state.user;
+    console.log('avatarURI:', avatarURI, name, this);
+    return (
+      <View>
+          <View style={styles.topBox}>
+            <View style={styles.emptyAvatar}>
+              <AvatarImage uri={avatarURI} style={styles.avatarImage} />
+            </View>
+            <Text style={styles.usernameText}>{name}</Text>
+          </View>
+        <View style={styles.bottomBox}>
+          <ActionRow showSeparator={false} title="设置" onPress={this.onSettingPress} iconImage={SettingIcon} />
+        </View>
+      </View>
     );
   }
 
@@ -49,6 +84,23 @@ class MeTab extends Component {
 
   onSettingPress() {
     console.log('press');
+  }
+
+  async loadCurrentUser(user) {
+    if (!user) {
+
+    } else {
+      const { name } = user;
+      try {
+        const $ = await Networking.get(`/member/${name}`);
+        const avatarURI = $('img.avatar').attr('src');
+        user.avatarURI = avatarURI;
+        console.log('user:', user);
+        this.setState({user});
+      } catch (error) {
+        console.log('error:', error);
+      }
+    }
   }
 
 }
@@ -71,6 +123,11 @@ const styles = Style.create({
     backgroundColor: '#F1F1F5',
     borderRadius: 55,
     marginLeft: 12,
+    overflow: 'hidden',
+  },
+  avatarImage: {
+    width: 55,
+    height: 55,
   },
   usernameText: {
     marginLeft: 10,
