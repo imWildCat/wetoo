@@ -7,6 +7,9 @@ import Style from '../../../utilities/style';
 import Separator from '../../common/Separator';
 
 class ActionRow extends Component {
+  static defaultProps = {
+    showSeparator: true,
+  };
   static propTypes = {
     title: PropTypes.string.isRequired,
     onPress: PropTypes.func.isRequired,

@@ -1,5 +1,6 @@
 import Networking from './v2_networking';
-import EventEmitter from 'events';
+import {EventEmitter} from 'events';
+import CookieManager from 'react-native-cookies';
 
 class SessionEmitter extends EventEmitter {
 }
@@ -23,6 +24,7 @@ export default class SessionManager {
   }
 
   static emitStatusChanged(user) {
+    console.log('emitStatusChanged:', user);
     sessionEmitter.emit('status', user);
   }
 
@@ -64,4 +66,18 @@ export default class SessionManager {
   static listenToStatusChanged(callback) {
     sessionEmitter.on('status', callback);
   }
+
+  static logOut() {
+    return new Promise((resolve, reject) => {
+      CookieManager.clearAll((err, res) => {
+        if (err) {
+          reject(err);
+        } else {
+          this.emitStatusChanged(null);
+          resolve(res);
+        }
+      });
+    });
+  }
+
 }

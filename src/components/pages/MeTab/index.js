@@ -12,6 +12,7 @@ import ActionRow from './ActionRow';
 import AvatarImage from '../../common/AvatarImage';
 
 import SettingIcon from '../../assets/setting_icon.png';
+import LogOutIcon from '../../assets/signout_icon.png';
 
 class MeTab extends Component {
   state = { user: null };
@@ -20,13 +21,17 @@ class MeTab extends Component {
     super(props);
 
     this.onLoginPress = this.onLoginPress.bind(this);
+    this.onLogOutPress = this.onLogOutPress.bind(this);
     this.onSettingPress = this.onSettingPress.bind(this);
     this.renderLoggedIn = this.renderLoggedIn.bind(this);
     this.renderNotLoggedIn = this.renderNotLoggedIn.bind(this);
   }
 
   componentDidMount() {
-    SessionManager.listenToStatusChanged((user) => this.loadCurrentUser(user));
+    SessionManager.listenToStatusChanged((user) => {
+      console.log('listenToStatusChanged:', user);
+      this.loadCurrentUser(user)
+    });
 
     this.loadCurrentUser(SessionManager.getCurrentUser());
   }
@@ -72,7 +77,8 @@ class MeTab extends Component {
             <Text style={styles.usernameText}>{name}</Text>
           </View>
         <View style={styles.bottomBox}>
-          <ActionRow showSeparator={false} title="设置" onPress={this.onSettingPress} iconImage={SettingIcon} />
+          <ActionRow title="设置" onPress={this.onSettingPress} iconImage={SettingIcon} />
+          <ActionRow showSeparator={false} title="注销" onPress={this.onLogOutPress} iconImage={LogOutIcon} />
         </View>
       </View>
     );
@@ -86,9 +92,17 @@ class MeTab extends Component {
     console.log('press');
   }
 
+  onLogOutPress() {
+    SessionManager.logOut().then(res => {
+      console.log('log out succeed:', res);
+    }, err => {
+      console.log('log out err:', err);
+    });
+  }
+
   async loadCurrentUser(user) {
     if (!user) {
-
+      this.setState({user});
     } else {
       const { name } = user;
       try {
