@@ -55,8 +55,10 @@ const styles = Style.create({
   titleText: {
     marginLeft: 13,
     color: '#333333',
+    fontSize: 16,
   },
   rightArrowContainer: {
+    marginTop: 2,
     flex: 1,
   },
   rightArrow: {

@@ -41,7 +41,7 @@ class TopicListPage extends Component {
   }
 
   loadList() {
-    const {slug, isNode} = this.props;
+    const { slug, isNode } = this.props;
     const uri = isNode ? `/go/${slug}` : `?tab=${slug}`;
     console.log('uri:', uri);
     V2Networking.get(uri)
@@ -118,7 +118,7 @@ class TopicListPage extends Component {
   render() {
     return (
       <View style={{ flex: 1 }}>
-        <StatusBar barStyle={'light-content'}/>
+        <StatusBar barStyle={'light-content'} />
         {this._renderContent()}
       </View>
     );
@@ -130,8 +130,8 @@ class TopicListPage extends Component {
         <ListView
           style={{ flex: 1 }}
           dataSource={this.state.dataSource}
-          renderRow={this.renderRow.bind(this)}
-        />
+          enableEmptySections={true}
+          renderRow={this.renderRow.bind(this)} />
       );
     } else {
       return <ActivityIndicator />;
@@ -139,14 +139,14 @@ class TopicListPage extends Component {
   }
 
   renderRow(rowData) {
-    const {isNode} = this.props;
+    const { isNode } = this.props;
     return (
       <TopicListRow isNode={isNode} onRowPress={this.onRowPress.bind(this)} {...rowData} />
     );
   }
 
   onRowPress(topicID) {
-    Actions.topic({topicID});
+    Actions.topic({ topicID });
   }
 
 }
