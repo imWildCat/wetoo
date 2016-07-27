@@ -72,17 +72,17 @@ class TopicPage extends Component {
         // Parse topic
         const _topicMetaElement = $($('#Main div.box .header'));
         const title = _topicMetaElement.find('h1').text();
-        const topicID = Number(StringUtilities.matchFirstOrNull(_topicMetaElement.find('div.votes').attr('id'), /topic_(\d+)_votes/));
-        const replyCount = Number(StringUtilities.matchFirstOrNull($('#Main div.box .cell span.gray').text(), /(\d+) 回复/));
+        const topicID = Number(StringUtilities.matchFirst(_topicMetaElement.find('div.votes').attr('id'), /topic_(\d+)_votes/));
+        const replyCount = Number(StringUtilities.matchFirst($('#Main div.box .cell span.gray').text(), /(\d+) 回复/));
         const topicContent = $('#Main .box .topic_content').html();
         // const postscript = $('#Main .box .subtle').html();
         // TODO: Find a better regex expression for Chinese
-        const topicTime = StringUtilities.betterV2TimeString(StringUtilities.matchFirstOrNull(_topicMetaElement.find('small.gray').text(), / · ([a-zA-Z0-9 \u4E00-\u9FA5\uF900-\uFA2D]+) ·/));
+        const topicTime = StringUtilities.betterV2TimeString(StringUtilities.matchFirst(_topicMetaElement.find('small.gray').text(), / · ([a-zA-Z0-9 \u4E00-\u9FA5\uF900-\uFA2D]+) ·/));
 
         // TODO: Implement appreciation count and favourite count for topic:
         // const _topicOtherInfoElementText = $('#Main .box .topic_buttons .fr').text();
-        // const appreciationCount = Number(StringUtilities.matchFirstOrNull(_topicOtherInfoElementText, /(\d+) 人感谢/));
-        // const favoriteCount = Number(StringUtilities.matchFirstOrNull(_topicOtherInfoElementText, /(\d+) 人收藏/));
+        // const appreciationCount = Number(StringUtilities.matchFirst(_topicOtherInfoElementText, /(\d+) 人感谢/));
+        // const favoriteCount = Number(StringUtilities.matchFirst(_topicOtherInfoElementText, /(\d+) 人收藏/));
 
         // Parse author of topic
         const authorName = _topicMetaElement.find('small.gray > a').text();
@@ -91,7 +91,7 @@ class TopicPage extends Component {
         // Parse node
         const _nodeElement = $('#Main .box .header > a:nth-child(4)');
         const nodeName = _nodeElement.text();
-        const nodeSlug = StringUtilities.matchFirstOrNull(_nodeElement.attr('href'), /\/go\/(\w{1,31})/);
+        const nodeSlug = StringUtilities.matchFirst(_nodeElement.attr('href'), /\/go\/(\w{1,31})/);
 
         const topic = {
           id: topicID,
@@ -117,7 +117,7 @@ class TopicPage extends Component {
           const _element = $(_replyElements[index]);
 
           // console.log(_element.attr('class'), _element.hasClass('normalUser'));
-          const replyID = Number(StringUtilities.matchFirstOrNull(_element.attr('id'), /r_(\d{1,15})/));
+          const replyID = Number(StringUtilities.matchFirst(_element.attr('id'), /r_(\d{1,15})/));
           if (!replyID) {
             // If there is no replyID, it might be a pagination element
             continue;
@@ -128,7 +128,7 @@ class TopicPage extends Component {
 
           const time = StringUtilities.betterV2TimeString(_element.find('span[class="fade small"]').text());
           const floor = Number(_element.find('span.no').text());
-          const replyAppreciationCount = Number(StringUtilities.matchFirstOrNull(_element.find('span[class="small fade"]').text(), /♥ (\d+)/));
+          const replyAppreciationCount = Number(StringUtilities.matchFirst(_element.find('span[class="small fade"]').text(), /♥ (\d+)/));
 
           posts.push({
             id: replyID, content: replyContent, authorAvatarURI: replyAuthorAvatarURI,

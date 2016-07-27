@@ -101,12 +101,12 @@ class UserPage extends Component {
         }
         const avatarURI = $('#Main .box .cell table tr td img.avatar').attr('src');
         const _numberAndDateElementText = $('#Main .fa-time').parent().text();
-        const num = Number(StringUtilities.matchFirstOrNull(_numberAndDateElementText, /第 (\d+) 号会员/));
-        let regDate = StringUtilities.matchFirstOrNull(_numberAndDateElementText, /(\d{4}-\d{2}-\d{2})/);
+        const num = Number(StringUtilities.matchFirst(_numberAndDateElementText, /第 (\d+) 号会员/));
+        let regDate = StringUtilities.matchFirst(_numberAndDateElementText, /(\d{4}-\d{2}-\d{2})/);
         if (regDate) {
           regDate = regDate.replace(/(\-0)|(\-)/g, '.');
         }
-        const liveness = Number(StringUtilities.matchFirstOrNull(_numberAndDateElementText, /今日活跃度排名 (\d+)/));
+        const liveness = Number(StringUtilities.matchFirst(_numberAndDateElementText, /今日活跃度排名 (\d+)/));
 
         // Social
         const getSocialElement = (socialMediaName) => {

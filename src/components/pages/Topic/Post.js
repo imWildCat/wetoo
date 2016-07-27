@@ -69,13 +69,13 @@ class Post extends Component {
   _onLinkPress(link) {
     const { onUserPress } = this.props;
     if (link.startsWith('/member/')) {
-      const username = StringUtilities.matchFirstOrNull(link, /\/member\/(\w+)/);
+      const username = StringUtilities.matchFirst(link, /\/member\/(\w+)/);
       onUserPress(username);
     } else if (link.startsWith('/t/')) {
-      const topicID = StringUtilities.matchFirstOrNull(link, /\/t\/(\d+)/);
+      const topicID = StringUtilities.matchFirst(link, /\/t\/(\d+)/);
       console.log({ topicID, });
     } else if (link.startsWith('/go/')) {
-      const nodeSlug = StringUtilities.matchFirstOrNull(link, /\/go\/(\w+)/);
+      const nodeSlug = StringUtilities.matchFirst(link, /\/go\/(\w+)/);
       console.log({ nodeSlug });
     } else if (link.startsWith('https://') || link.startsWith('http://')) {
       const outerLink = link;

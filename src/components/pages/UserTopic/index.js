@@ -78,13 +78,13 @@ class UserTopicPage extends Component {
         for (var i = 0; i < _topicElements.length; i++) {
           const _element = $(_topicElements[i]);
           const _titleElement = _element.find('.item_title a');
-          const topicID = Number(StringUtilities.matchFirstOrNull(
+          const topicID = Number(StringUtilities.matchFirst(
             _titleElement.attr('href'),
             /\/t\/(\d+)/
           ));
           const title = _titleElement.text();
           const nodeName = _element.find('a.node').text();
-          const time = StringUtilities.matchFirstOrNull(
+          const time = StringUtilities.matchFirst(
             _element.find('.small.fade').text(),
             /&nbsp;•&nbsp; ([0-9 \u4e00-\u9fa5]+)前 &nbsp;/
           );

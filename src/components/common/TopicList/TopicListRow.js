@@ -12,7 +12,7 @@ class TopicListRow extends Component {
     let nodeView = null;
     if (!isNode) {
       nodeView = <View style={styles.nodeView}>
-        <PointSeparator style={styles.pointSeparator}/>
+        <PointSeparator style={styles.pointSeparator} />
         <View style={styles.nodeNameWrapper}>
           <Text style={styles.nodeName}>{nodeName}</Text>
         </View>
@@ -23,19 +23,19 @@ class TopicListRow extends Component {
       <TouchableHighlight underlayColor="#E6E6E6" onPress={() => onRowPress(id)} style={{ overflow: 'hidden' }}>
         <View style={styles.rowContainer}>
           <View style={styles.rowInnerContainer}>
-            <Image style={styles.avatarImage} source={{ uri: `https:${authorAvatarURI}` }}/>
+            <Image style={styles.avatarImage} source={{ uri: `https:${authorAvatarURI}` }} />
             <View style={styles.infoContainer}>
               <Text style={styles.titleText}>{title}</Text>
               <View style={styles.metaContainer}>
                 <Text style={styles.authorName}>{this.renderAuthorName(authorName)}</Text>
                 {nodeView}
                 <View style={styles.replyCountLayout}>
-                  <ReplyCount count={replyCount}/>
+                  <ReplyCount count={replyCount} />
                 </View>
               </View>
             </View>
           </View>
-          <View style={styles.rowSeparator}/>
+          <View style={styles.rowSeparator} />
         </View>
       </TouchableHighlight>
     );

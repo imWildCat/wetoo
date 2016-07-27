@@ -56,7 +56,7 @@ class TopicListPage extends Component {
           var element = topicElements[index];
           const e = $(element);
 
-          const id = Number(StringUtilities.matchFirstOrNull(e.find('.item_title a').attr('href'), /t\/(\d+)/));
+          const id = Number(StringUtilities.matchFirst(e.find('.item_title a').attr('href'), /t\/(\d+)/));
           const title = e.find('.item_title a').text();
           const nodeName = e.find('a.node').text();
           const nodeURI = e.find('a.node').attr('href');
@@ -108,10 +108,10 @@ class TopicListPage extends Component {
       return 0;
     } else {
       const cleanTime = time.replace(/ /g, '');
-      days = Number(StringUtilities.matchFirstOrNull(cleanTime, /(\d+)天/));
-      hours = Number(StringUtilities.matchFirstOrNull(cleanTime, /(\d+)小时/));
-      minutes = Number(StringUtilities.matchFirstOrNull(cleanTime, /(\d+)分钟/));
-      seconds = Number(StringUtilities.matchFirstOrNull(cleanTime, /(\d+)秒/));
+      days = Number(StringUtilities.matchFirst(cleanTime, /(\d+)天/));
+      hours = Number(StringUtilities.matchFirst(cleanTime, /(\d+)小时/));
+      minutes = Number(StringUtilities.matchFirst(cleanTime, /(\d+)分钟/));
+      seconds = Number(StringUtilities.matchFirst(cleanTime, /(\d+)秒/));
     }
 
     const m = moment().subtract({ days, hours, minutes, seconds });
