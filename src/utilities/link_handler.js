@@ -12,7 +12,7 @@ class LinkHandler {
   }
 
   static handleURL(url) {
-
+    console.log(url);
   }
 
 }

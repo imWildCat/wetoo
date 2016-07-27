@@ -1,5 +1,5 @@
 const StringUtilities = {
-  matchFirstOrNull: (str, regex) => {
+  matchFirst: (str, regex) => {
     if (!str) {
       return null;
     } else {
