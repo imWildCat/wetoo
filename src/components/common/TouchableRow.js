@@ -8,10 +8,10 @@ class TouchableRow extends Component {
   };
 
   render() {
-    const {style, innerViewStyle, children} = this.props;
+    const { style, innerViewStyle, children } = this.props;
     return (
       <TouchableHighlight underlayColor="#E6E6E6" {...this.props} style={[{ overflow: 'hidden' }, style]}>
-        <View style={innerViewStyle}>
+        <View style={[{ flex: 1 }, innerViewStyle]}>
           {children}
         </View>
       </TouchableHighlight>

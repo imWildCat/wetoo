@@ -47,8 +47,8 @@ export default class GiftedListViewWrapper extends Component {
 
   onCancelSearch = () => {
     const { listView } = this.refs;
-    listView.props.onFetch(listView._getPage(), listView._postRefresh, { search: false });
     listView.refs.listview.scrollTo({ x: 0, y: 44, animated: true });
+    listView.props.onFetch(listView._getPage(), listView._postRefresh, { search: false });
   };
 
   renderHeader = () => {

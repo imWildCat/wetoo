@@ -44,7 +44,6 @@ class NodeList extends Component {
           refreshable={true}
           enableSearch={true}
           searchOnChange={true}
-          renderSeparator={this.renderSeparator}
         />
       </PageContainer>
     );
@@ -100,18 +99,13 @@ class NodeList extends Component {
   renderSearchResultRow = (rowData) => {
     const { slug, name } = rowData;
     return (
-      <TouchableRow style={styles.searchResultRow} onPress={() => this.onNodePress(slug, name)}>
-        <Text style={styles.searchResultRowText}>{name}（{slug}）</Text>
-      </TouchableRow>
+      <View style={styles.searchResultRow}>
+        <TouchableRow style={{flex: 1}} innerViewStyle={{justifyContent: 'center'}} onPress={() => this.onNodePress(slug, name)}>
+          <Text style={styles.searchResultRowText}>{name}（{slug}）</Text>
+        </TouchableRow>
+        <Separator marginLeft={0} />
+      </View>
     );
-  };
-
-  renderSeparator = (sectionID, rowID) => {
-    if (this.searchMode) {
-      return <Separator key={`${sectionID}-${rowID}`} />;
-    } else {
-      return null;
-    }
   };
 
   renderNodeElement = (node) => {
@@ -173,11 +167,17 @@ const styles = Style.create({
   searchResultRow: {
     height: 44,
     marginLeft: 12,
+  },
+  searchResultRowTextWrapper: {
+    flex: 1,
+  },
+  searchResultRowTextInnerWrapper: {
     justifyContent: 'center',
   },
   searchResultRowText: {
     fontSize: 14,
-  }
+  },
+
 });
 
 export default NodeList;
