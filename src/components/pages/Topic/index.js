@@ -1,5 +1,5 @@
 import React, {Component, PropTypes} from 'react';
-import { View, ListView, StyleSheet, ActivityIndicator, InteractionManager } from 'react-native';
+import {View, ListView, StyleSheet, ActivityIndicator, InteractionManager} from 'react-native';
 import cheerio from 'cheerio';
 
 import StringUtilities from '../../../utilities/string';
@@ -59,7 +59,7 @@ class TopicPage extends Component {
   }
 
   loadTopic() {
-    fetch(`http://www.v2ex.com/t/${this.props.topicID}`, {
+    fetch(`https://www.v2ex.com/t/${this.props.topicID}`, {
       headers: {
         'Accept': 'text/html',
         'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.112 Safari/537.36'
@@ -147,11 +147,9 @@ class TopicPage extends Component {
 }
 
 TopicPage.propTypes = {
-  pushTopicPage: PropTypes.func.isRequired,
-  pushUserPage: PropTypes.func.isRequired,
+  topicID: PropTypes.number.isRequired,
 };
 
-const styles = StyleSheet.create({
-});
+const styles = StyleSheet.create({});
 
 export default TopicPage;

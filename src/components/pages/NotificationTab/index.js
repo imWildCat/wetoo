@@ -1,9 +1,12 @@
 import React, {Component} from 'react';
-import {View, Text} from 'react-native';
+import {View, Text, TouchableWithoutFeedback} from 'react-native';
+import {Actions} from 'react-native-router-flux';
 
 import Networking from '../../../utilities/v2_networking';
 import HTMLHelper from '../../../utilities/html_helper';
+import StringUtilities from '../../../utilities/string';
 import Style from '../../../utilities/style';
+import SessionManager from '../../../utilities/session_manager';
 
 import AvatarImage from '../../common/AvatarImage';
 import HTMLView from '../../common/HTMLView';
@@ -15,7 +18,9 @@ import Separator from '../../common/Separator';
 class NotificationTab extends Component {
   static defaultProps = {};
   static propTypes = {};
-  static state = {};
+  static state = {
+    user: null,
+  };
 
   constructor(props) {
     super(props);
@@ -30,15 +35,18 @@ class NotificationTab extends Component {
   }
 
   renderRow = (rowData) => {
-    const { metaHTML, avatarURI, content, time } = rowData;
+    const { metaHTML, avatarURI, content, time, topicID, username } = rowData;
     return (
-      <TouchableRow onPress={() => this.onRowPress(rowData)} innerViewStyle={styles.rowWrapper}>
+      <TouchableRow onPress={() => this.onRowPress(topicID)} innerViewStyle={styles.rowWrapper}>
         <View style={styles.leftColumn}>
-          <AvatarImage style={styles.avatarImage} uri={avatarURI} />
+          <TouchableWithoutFeedback onPress={() => this.onAvatarPress(username)}>
+            <AvatarImage style={styles.avatarImage} uri={avatarURI} />
+          </TouchableWithoutFeedback>
         </View>
         <View style={styles.rightColumn}>
-          <HTMLView value={metaHTML} enableDefaultLinkHandler />
-          <HTMLView style={styles.content} value={content} enableDefaultLinkHandler />
+          <HTMLView stylesheet={metaHTMLStyle} value={metaHTML} enableDefaultLinkHandler />
+          <HTMLView style={styles.content} stylesheet={contentHTMLStyle} value={`<div>${content || ''}</div>`}
+                    enableDefaultLinkHandler />
           <Text style={styles.timeText}>{time}</Text>
         </View>
       </TouchableRow>
@@ -49,7 +57,7 @@ class NotificationTab extends Component {
     try {
       console.log('page:', page);
       const $ = await Networking.get(`/notifications?p=${page}`);
-      const { currentPage, lastPage, allLoaded } = HTMLHelper.parsePagination($);
+      const { allLoaded } = HTMLHelper.parsePagination($);
       const notifications = [];
       $('#Main .cell[id]').each((_i, _element) => {
         const _row = $(_element);
@@ -58,7 +66,9 @@ class NotificationTab extends Component {
         const avatarURI = _rawAvatarURI.replace('_mini.png', '_large.png');
         const content = _row.find('.payload').html();
         const time = _row.find('.snow').text().replace('前', '');
-        notifications.push({ metaHTML, avatarURI, content, time });
+        const topicID = Number(StringUtilities.matchFirst(metaHTML, /\/t\/(\d+)#/));
+        const username = StringUtilities.matchFirst(metaHTML, /\/member\/(\w+)/);
+        notifications.push({ metaHTML, avatarURI, content, time, topicID, username });
       });
       callback(notifications, { allLoaded });
     } catch (error) {
@@ -66,8 +76,14 @@ class NotificationTab extends Component {
     }
   }
 
-  onRowPress = (rowData) => {
+  onRowPress = (topicID) => {
+    console.log('onRowPress:', topicID);
+    Actions.topic({ topicID });
+  };
 
+  onAvatarPress = (username) => {
+    console.log('onAvatar:', username);
+    Actions.user({ username });
   };
 
   renderSeparator = (sectionID, rowID, adjacentRowHighlighted) => {
@@ -97,7 +113,6 @@ const styles = Style.create({
   },
   timeText: {
     fontSize: 12,
-    // textAlign: 'center',
     color: '#B0B0B3',
     marginTop: 5,
     alignSelf: 'flex-end',
@@ -110,6 +125,24 @@ const styles = Style.create({
   content: {
     marginTop: 5,
   }
+});
+
+const metaHTMLStyle = Style.create({
+  a: {
+    color: '#000000',
+    fontWeight: '500',
+  }
+});
+
+const contentHTMLStyle = Style.create({
+  div: {
+    color: '#333333',
+    fontWeight: '200',
+  },
+  a: {
+    color: '#333333',
+    fontWeight: '400',
+  },
 });
 
 

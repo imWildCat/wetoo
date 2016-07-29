@@ -8,6 +8,7 @@ import StringUtilities from '../../../utilities/string';
 import V2Networking from '../../../utilities/v2_networking';
 import SessionManager from '../../../utilities/session_manager';
 
+import GiftedListView from '../../common/GiftedListView';
 import TopicListRow from './TopicListRow';
 
 class TopicListPage extends Component {
@@ -21,29 +22,9 @@ class TopicListPage extends Component {
     isNode: PropTypes.bool,
   };
 
-  constructor(props) {
-    super(props);
-
-    this.ds = new ListView.DataSource({
-      rowHasChanged: (r1, r2) => {
-        return r1 !== r2;
-      }
-    });
-    this.state = {
-      dataSource: null,
-    };
-  }
-
-  componentDidMount() {
-    InteractionManager.runAfterInteractions(() => {
-      this.loadList();
-    });
-  }
-
-  loadList() {
+  onFetch = (page = 1, callback, options) => {
     const { slug, isNode } = this.props;
     const uri = isNode ? `/go/${slug}` : `?tab=${slug}`;
-    console.log('uri:', uri);
     V2Networking.get(uri)
       .then($ => {
         // Handle session status firstly
@@ -87,19 +68,13 @@ class TopicListPage extends Component {
           });
         }
 
-        // It might not need sorting now:
-        // topicList.sort((a, b) => {
-        //     if (a.pinned && !b.pinned) {
-        //         return -1;
-        //     }
-        //     return b.timestamp - a.timestamp;
-        // });
-        this.setState({ dataSource: this.ds.cloneWithRows(topicList) });
+        InteractionManager.runAfterInteractions(() => {
+          callback(topicList);
+        });
       }, error => {
-        let des = error;
         console.log('error:', error);
       });
-  }
+  };
 
   parseTimeToUnix(time) {
     var days, hours, minutes, seconds;
@@ -122,31 +97,20 @@ class TopicListPage extends Component {
     return (
       <View style={{ flex: 1 }}>
         <StatusBar barStyle={'light-content'} />
-        {this._renderContent()}
+        <GiftedListView
+          style={{ flex: 1 }}
+          onFetch={this.onFetch}
+          renderRow={this.renderRow.bind(this)} />
       </View>
     );
   }
 
-  _renderContent() {
-    if (this.state.dataSource) {
-      return (
-        <ListView
-          style={{ flex: 1 }}
-          dataSource={this.state.dataSource}
-          enableEmptySections={true}
-          renderRow={this.renderRow.bind(this)} />
-      );
-    } else {
-      return <ActivityIndicator />;
-    }
-  }
-
-  renderRow(rowData) {
+  renderRow = (rowData) => {
     const { isNode } = this.props;
     return (
-      <TopicListRow isNode={isNode} onRowPress={this.onRowPress.bind(this)} {...rowData} />
+      <TopicListRow isNode={isNode} onRowPress={this.onRowPress} {...rowData} />
     );
-  }
+  };
 
   onRowPress(topicID) {
     Actions.topic({ topicID });

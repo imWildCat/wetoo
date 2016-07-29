@@ -79,7 +79,7 @@ class UserPage extends Component {
   }
 
   _loadUser() {
-    const { username } = this.props.username;
+    const { username } = this.props;
     V2Networking.get(`/member/${username}`)
       .then($ => {
 

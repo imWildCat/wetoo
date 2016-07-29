@@ -38,7 +38,7 @@ const styles = Style.create({
 
 const defaultStylesheet = Style.create({
   a: {
-    color: '#633E1E',
+    color: '#329EED',
     fontWeight: '500',
   }
 });
