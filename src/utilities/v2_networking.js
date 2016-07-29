@@ -4,6 +4,9 @@ const V2Networking = {
   get: (uri) => {
     return V2Networking.request('GET', uri);
   },
+  getJSON: (uri) => {
+    return V2Networking.request('GET', uri, null, null, true);
+  },
   post: (uri, data, additionalHeaders = null) => {
     const headers = Object.assign({ 'Content-Type': 'application/x-www-form-urlencoded' }, additionalHeaders);
     return V2Networking.request(
@@ -13,7 +16,7 @@ const V2Networking = {
       { body: serializeJSON2FormData(data) }
     );
   },
-  request: (method, uri, additionalHeaders = null, additionalOptions = null) => {
+  request: (method, uri, additionalHeaders = null, additionalOptions = null, rawResponse = false) => {
     // TODO: Check user's setting for http/https
 
     const headers = Object.assign({
@@ -27,7 +30,11 @@ const V2Networking = {
       headers,
     }, additionalOptions);
 
-    return fetch(`https://www.v2ex.com${uri}`, options).then(res => res.text()).then(text => cheerio.load(text, { decodeEntities: false }));
+    if (rawResponse) {
+      return fetch(`https://www.v2ex.com${uri}`, options);
+    } else {
+      return fetch(`https://www.v2ex.com${uri}`, options).then(res => res.text()).then(text => cheerio.load(text, { decodeEntities: false }));
+    }
   }
 };
 

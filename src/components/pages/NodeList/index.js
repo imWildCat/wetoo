@@ -2,12 +2,16 @@ import React, {Component} from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
 import {Actions} from 'react-native-router-flux';
 
-import HomepageNodeData from './homepage_node_data.json';
 import Style from '../../../utilities/style';
+import NodeListManager from '../../../utilities/node_list_manager';
+
+import HomepageNodeData from './homepage_node_data.json';
 import GiftedListView from '../../common/GiftedListView';
 import PageContainer from '../../common/PageContainer';
 
 class NodeList extends Component {
+
+  searchMode = false;
 
   constructor(props) {
     super(props);
@@ -16,6 +20,16 @@ class NodeList extends Component {
     this.onFetch = this.onFetch.bind(this);
     this.renderRow = this.renderRow.bind(this);
     this.renderNodeElement = this.renderNodeElement.bind(this);
+
+    this.initializeNodes();
+  }
+
+  async initializeNodes() {
+    try {
+      this.nodes = await NodeListManager.getNodes();
+    } catch (error) {
+      console.log('error:', error);
+    }
   }
 
   render() {
@@ -26,18 +40,48 @@ class NodeList extends Component {
           renderRow={this.renderRow}
           pagination={false}
           refreshable={false}
+          enableSearch={true}
+          searchOnChange={true}
         />
       </PageContainer>
     );
   }
 
-  onFetch(page = 1, callback, options) {
-    callback(HomepageNodeData);
-  }
+  onFetch = (page = 1, callback, options) => {
+    const { search, keywords } = options;
+    if (search) {
+      this.searchMode = true;
+      const lowerKeywords = keywords.toLowerCase();
+      if (this.nodes) {
+        const filteredNodes = this.nodes.filter((node) => {
+          const { slug, name } = node;
+          if (slug && name && (slug.toLowerCase().indexOf(lowerKeywords) > -1 || name.toLowerCase().indexOf(lowerKeywords) > -1)) {
+            return true;
+          } else {
+            return false;
+          }
+        });
+        callback(filteredNodes);
+      } else {
+        this.initializeNodes();
+      }
+    } else {
+      this.searchMode = false;
+      callback(HomepageNodeData);
+    }
+  };
 
-  renderRow(rowData) {
+
+  renderRow = (rowData) => {
+    if (this.searchMode) {
+      return this.renderSearchResultRow(rowData);
+    } else {
+      return this.renderNormalRow(rowData);
+    }
+  };
+
+  renderNormalRow = (rowData) => {
     const { category_name: categoryName, nodes } = rowData;
-    console.log(nodes);
     return (
       <View style={styles.row}>
         <View style={styles.nodeCategoryWrapper}>
@@ -48,9 +92,18 @@ class NodeList extends Component {
         </View>
       </View>
     );
-  }
+  };
 
-  renderNodeElement(node) {
+  renderSearchResultRow = (rowData) => {
+    const { slug, name } = rowData;
+    return (
+      <View style={{ height: 30 }}>
+        <Text>{name}</Text>
+      </View>
+    );
+  };
+
+  renderNodeElement = (node) => {
     const { slug, name } = node;
     return (
       <View key={slug} style={styles.nodeWrapper}>
@@ -59,10 +112,10 @@ class NodeList extends Component {
         </TouchableOpacity>
       </View>
     );
-  }
+  };
 
   onNodePress(slug, name) {
-    Actions.node({slug, title: name});
+    Actions.node({ slug, title: name });
   }
 
 }
