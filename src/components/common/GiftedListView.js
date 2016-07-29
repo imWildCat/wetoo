@@ -15,11 +15,15 @@ export default class GiftedListViewWrapper extends Component {
     searchOnChange: PropTypes.bool,
   };
 
+  state = {
+    contentOffset: { x: 0, y: 44 },
+  };
+
   render() {
     const { enableSearch } = this.props;
     const searchProps = enableSearch ? {
       renderHeader: this.renderHeader,
-      contentOffset: { x: 0, y: 44 },
+      contentOffset: this.state.contentOffset,
     } : {};
 
     return <GiftedListView ref="listView" enableEmptySections={true} {...searchProps} {...this.props} />;
@@ -44,6 +48,7 @@ export default class GiftedListViewWrapper extends Component {
   onCancelSearch = () => {
     const { listView } = this.refs;
     listView.props.onFetch(listView._getPage(), listView._postRefresh, { search: false });
+    listView.refs.listview.scrollTo({ x: 0, y: 44, animated: true });
   };
 
   renderHeader = () => {

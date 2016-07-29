@@ -5,7 +5,7 @@ class Separator extends Component {
   render() {
     const { marginLeft } = this.props;
     let style = {
-      marginLeft: 16,
+      marginLeft: 12,
       backgroundColor: '#CCCCDE',
       height: 0.5,
     };

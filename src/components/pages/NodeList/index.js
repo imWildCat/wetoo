@@ -8,6 +8,8 @@ import NodeListManager from '../../../utilities/node_list_manager';
 import HomepageNodeData from './homepage_node_data.json';
 import GiftedListView from '../../common/GiftedListView';
 import PageContainer from '../../common/PageContainer';
+import Separator from '../../common/Separator';
+import TouchableRow from '../../common/TouchableRow';
 
 class NodeList extends Component {
 
@@ -39,9 +41,10 @@ class NodeList extends Component {
           onFetch={this.onFetch}
           renderRow={this.renderRow}
           pagination={false}
-          refreshable={false}
+          refreshable={true}
           enableSearch={true}
           searchOnChange={true}
+          renderSeparator={this.renderSeparator}
         />
       </PageContainer>
     );
@@ -97,10 +100,18 @@ class NodeList extends Component {
   renderSearchResultRow = (rowData) => {
     const { slug, name } = rowData;
     return (
-      <View style={{ height: 30 }}>
-        <Text>{name}</Text>
-      </View>
+      <TouchableRow style={styles.searchResultRow} onPress={() => this.onNodePress(slug, name)}>
+        <Text style={styles.searchResultRowText}>{name}（{slug}）</Text>
+      </TouchableRow>
     );
+  };
+
+  renderSeparator = (sectionID, rowID) => {
+    if (this.searchMode) {
+      return <Separator key={`${sectionID}-${rowID}`} />;
+    } else {
+      return null;
+    }
   };
 
   renderNodeElement = (node) => {
@@ -156,6 +167,16 @@ const styles = Style.create({
     marginLeft: 10,
     marginRight: 10,
     color: '#333333',
+  },
+
+  // Search
+  searchResultRow: {
+    height: 44,
+    marginLeft: 12,
+    justifyContent: 'center',
+  },
+  searchResultRowText: {
+    fontSize: 14,
   }
 });
 
