@@ -203,7 +203,7 @@ const styles = Style.create({
     flex: 1,
     height: 30,
     android: {
-      height: 33,
+      height: 36,
     }
   },
 

@@ -47,6 +47,7 @@ class ListViewSearchBar extends Component {
       return;
     }
 
+
     const { onChangeText } = this.props;
     onChangeText && onChangeText(text);
   };
