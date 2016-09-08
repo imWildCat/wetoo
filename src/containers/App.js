@@ -18,6 +18,7 @@ import UserTopicPageContainer from './UserTopicPage';
 import NodeListPage from '../components/pages/NodeList';
 import NodePage from '../components/pages/Node';
 import LoginPage from '../components/pages/Login';
+import NewTopicPage from '../components/pages/NewTopic';
 
 const store = configureStore();
 
@@ -66,6 +67,7 @@ class App extends Component {
             <Scene key="user_topic" component={UserTopicPageContainer} title="用户话题" />
             <Scene key="node" component={NodePage} title="节点" />
             <Scene key="login" component={LoginPage} direction="vertical" hideNavBar={true} />
+            <Scene key="newTopic" component={NewTopicPage} title="创建话题" />
           </Scene>
         </RouterWithRedux>
       </Provider>
