@@ -6,6 +6,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import Style from '../../../utilities/style';
 import NodeListManager from '../../../utilities/node_list_manager';
 import PageContainer from '../../common/PageContainer';
+import NodeSelector from './NodeSelector';
 
 class NewTopicPage extends Component {
   static propTypes = {
@@ -14,6 +15,7 @@ class NewTopicPage extends Component {
   state = {
     nodeName: '问与答（默认）',
     nodeSlug: 'qna',
+    nodeSelectorVisible: false,
   };
 
   constructor(props) {
@@ -68,12 +70,12 @@ class NewTopicPage extends Component {
   }
 
   render() {
-    const { nodeName } = this.state;
+    const { nodeName, nodeSlug, nodeSelectorVisible } = this.state;
     return (
       <PageContainer>
         <View style={styles.nodeSelectorWrapper}>
           <Text style={styles.nodeSelectorTitle}>节点：</Text>
-          <TouchableOpacity style={styles.nodeSelectorTouchable}>
+          <TouchableOpacity style={styles.nodeSelectorTouchable} onPress={this.showNodeSelector}>
             <View style={styles.nodeSelectorTouchableInnerWrapper}>
               <Text style={styles.nodeSelectorText}>{nodeName}</Text>
               <Icon style={styles.nodeSelectorIcon} size={13} name="chevron-right" color="#329EED" />
@@ -95,12 +97,31 @@ class NewTopicPage extends Component {
             multiline={true}
             placeholder="内容" />
         </View>
+        <NodeSelector visible={nodeSelectorVisible} nodeSlug={nodeSlug} onCancel={this.onNodeSelectorCancel}
+                      onSelect={this.onNodeSelectorSelect} />
       </PageContainer>
     );
   }
 
   onTitleTextInputSubmit = () => {
     this.refs['contentTextInput'].focus();
+  };
+
+  onNodeSelectorCancel = () => {
+    this.hideNodeSelector();
+  };
+
+  onNodeSelectorSelect = (nodeName, nodeSlug) => {
+    this.hideNodeSelector();
+    this.setState({nodeName, nodeSlug});
+  };
+
+  hideNodeSelector = () => {
+    this.setState({ nodeSelectorVisible: false });
+  };
+
+  showNodeSelector = () => {
+    this.setState({ nodeSelectorVisible: true });
   };
 
 }
