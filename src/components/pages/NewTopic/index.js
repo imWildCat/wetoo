@@ -1,9 +1,12 @@
 import React, {Component, PropTypes} from 'react';
-import {View, Text, TextInput, TouchableOpacity} from 'react-native';
+import {View, Text, TextInput, TouchableOpacity, Alert} from 'react-native';
 import {Actions} from 'react-native-router-flux';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import KeyboardSpacer from 'react-native-keyboard-spacer';
 
 import Style from '../../../utilities/style';
+import Networking from '../../../utilities/v2_networking';
+import StringUtilities from '../../../utilities/string';
 import NodeListManager from '../../../utilities/node_list_manager';
 import PageContainer from '../../common/PageContainer';
 import NodeSelector from './NodeSelector';
@@ -16,6 +19,9 @@ class NewTopicPage extends Component {
     nodeName: '问与答（默认）',
     nodeSlug: 'qna',
     nodeSelectorVisible: false,
+    title: null,
+    content: null,
+    isPosting: false,
   };
 
   constructor(props) {
@@ -63,11 +69,11 @@ class NewTopicPage extends Component {
   onRightButtonPress = () => {
     this.refs['titleTextInput'].blur();
     this.refs['contentTextInput'].blur();
+    const {isPosting} = this.state;
+    if(!isPosting) {
+      this.postNewTopic();
+    }
   };
-
-  async requestOnceCode() {
-    // TODO: Implement get once code: $('input[name="once"]')
-  }
 
   render() {
     const { nodeName, nodeSlug, nodeSelectorVisible } = this.state;
@@ -88,6 +94,7 @@ class NewTopicPage extends Component {
             returnKeyType="next"
             style={styles.titleTextInput}
             onSubmitEditing={this.onTitleTextInputSubmit}
+            onChangeText={title => this.setState({ title })}
             placeholder="标题" />
         </View>
         <View style={styles.contentTextInputWrapper}>
@@ -95,8 +102,10 @@ class NewTopicPage extends Component {
             ref="contentTextInput"
             style={styles.contentTextInput}
             multiline={true}
+            onChangeText={content =>this.setState({ content })}
             placeholder="内容" />
         </View>
+        <KeyboardSpacer />
         <NodeSelector visible={nodeSelectorVisible} nodeSlug={nodeSlug} onCancel={this.onNodeSelectorCancel}
                       onSelect={this.onNodeSelectorSelect} />
       </PageContainer>
@@ -113,7 +122,7 @@ class NewTopicPage extends Component {
 
   onNodeSelectorSelect = (nodeName, nodeSlug) => {
     this.hideNodeSelector();
-    this.setState({nodeName, nodeSlug});
+    this.setState({ nodeName, nodeSlug });
   };
 
   hideNodeSelector = () => {
@@ -122,6 +131,50 @@ class NewTopicPage extends Component {
 
   showNodeSelector = () => {
     this.setState({ nodeSelectorVisible: true });
+  };
+
+  postNewTopic = () => {
+    const { nodeSlug, title, content } = this.state;
+    const once = Networking.getOnce();
+    this.onPosting();
+    Networking.post(`/new/${nodeSlug}`, { title, content, syntax: 0, once }).then($ => {
+      this.onPostingEnd();
+      const docTitle = $('title').text();
+      if (docTitle.indexOf(title) > -1) {
+        const canonicalElement = $('link[rel="canonical"]');
+        const newTopicID = Number(StringUtilities.matchFirst(canonicalElement.attr('href'), /t\/(\d+)/));
+        if (newTopicID && newTopicID > 0) {
+          Actions.pop();
+          Actions.topic({ topicID: newTopicID });
+          return;
+        }
+      }
+      // Error:
+      let problemString = $('.problem ul li').text();
+      console.log('problemString:', problemString);
+      if(!problemString || problemString === '') {
+        problemString = '未知错误';
+      }
+      Alert.alert('发帖失败', problemString);
+      // console.log($.html());
+    }, error => {
+      this.onPosting();
+      Alert.alert('发帖失败', '网络错误');
+    });
+    console.log({ nodeSlug, title, content });
+  };
+
+  onPosting = () => {
+    this.setState({ isPosting: true });
+    Actions.refresh({
+      rightTitle: '发布中...',
+      rightButtonTextStyle: { color: 'gray' },
+    });
+  };
+
+  onPostingEnd = () => {
+    this.setState({ isPosting: false });
+    this.setUpNavigationBar();
   };
 
 }

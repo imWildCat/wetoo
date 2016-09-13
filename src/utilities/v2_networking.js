@@ -27,7 +27,7 @@ class V2Networking {
 
     const headers = Object.assign({
       'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
-      'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.112 Safari/537.36',
+      'User-Agent': 'Wetoo Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.112 Safari/537.36',
       'Connection': 'keep-alive',
     }, additionalHeaders);
 
@@ -64,12 +64,8 @@ function parseOnce($) {
   const tempOnce = StringUtilities.matchFirst(onClick, /signout\?once=(\d+)/);
   if (tempOnce) {
     once = tempOnce;
-    console.log('Once detected:', once);
-  } else {
-    console.log('Once code not found');
   }
-
-  return once;
+  return tempOnce;
 }
 
 export default V2Networking;
