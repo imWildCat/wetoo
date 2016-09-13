@@ -4,6 +4,7 @@ import {View, Text, Image, TouchableWithoutFeedback, StyleSheet, Dimensions } fr
 import HTMLView from 'react-native-htmlview';
 
 import StringUtilities from '../../../utilities/string';
+import LinkHandler from '../../../utilities/link_handler';
 import ResizableImage from '../../common/ResizableImage';
 
 const {width: screenWidth} = Dimensions.get('window');
@@ -67,22 +68,7 @@ class Post extends Component {
   }
 
   _onLinkPress(link) {
-    const { onUserPress } = this.props;
-    if (link.startsWith('/member/')) {
-      const username = StringUtilities.matchFirst(link, /\/member\/(\w+)/);
-      onUserPress(username);
-    } else if (link.startsWith('/t/')) {
-      const topicID = StringUtilities.matchFirst(link, /\/t\/(\d+)/);
-      console.log({ topicID, });
-    } else if (link.startsWith('/go/')) {
-      const nodeSlug = StringUtilities.matchFirst(link, /\/go\/(\w+)/);
-      console.log({ nodeSlug });
-    } else if (link.startsWith('https://') || link.startsWith('http://')) {
-      const outerLink = link;
-      console.log({ outerLink });
-    } else {
-      console.log('Unhandled link:', link);
-    }
+    LinkHandler.handleURL(link);
   }
 
   buildOtherInfoText(time, floor) {
@@ -91,10 +77,6 @@ class Post extends Component {
   }
 
 }
-
-Post.propTypes = {
-  onUserPress: PropTypes.func.isRequired,
-};
 
 const styles = StyleSheet.create({
   metaContainer: {

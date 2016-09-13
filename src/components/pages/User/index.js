@@ -1,5 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import {ScrollView, StyleSheet, View, Image, Text, ActivityIndicator, InteractionManager} from 'react-native';
+import {Actions} from 'react-native-router-flux';
 
 import V2Networking from '../../../utilities/v2_networking';
 import StringUtilities from '../../../utilities/string';
@@ -37,7 +38,7 @@ class UserPage extends Component {
 
   _renderContent() {
     if (!this.state.username) {
-      return <ActivityIndicator />;
+      return <ActivityIndicator style={{ marginTop: 20 }} />;
     } else {
       const {
         username, signature, company, position, avatarURI,
@@ -129,13 +130,13 @@ class UserPage extends Component {
           avatarURI, num, regDate, liveness,
           github, twitter, dribbble, instagram,
         });
+        Actions.refresh({ title: username });
       });
   }
 }
 
 UserPage.propTypes = {
   username: PropTypes.string.isRequired,
-  pushUserTopicPage: PropTypes.func.isRequired,
 };
 
 const styles = StyleSheet.create({

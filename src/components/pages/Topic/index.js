@@ -52,11 +52,7 @@ class TopicPage extends Component {
     if (rowData.title) {
       return <TopicHeader {...rowData} />;
     }
-    return <Post {...rowData} onUserPress={this._onUserPress.bind(this)} />;
-  }
-
-  _onUserPress(username) {
-    this.props.pushUserPage(username);
+    return <Post {...rowData} />;
   }
 
   loadTopic() {
