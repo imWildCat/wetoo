@@ -1,10 +1,8 @@
 import React, {Component, PropTypes} from 'react';
 import {Actions} from 'react-native-router-flux';
 
-import Style from '../../../utilities/style';
 import TopicList from '../../common/TopicList';
 import PageContainer from '../../common/PageContainer';
-import NewTopicButton from '../../common/NewTopicButton';
 
 import NewTopicButtonImage from '../../assets/new_topic_icon.png';
 

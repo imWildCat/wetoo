@@ -1,10 +1,13 @@
 import React, {Component, PropTypes} from 'react';
 import {View, StyleSheet} from 'react-native';
 import ViewPager from 'react-native-viewpager';
+import {Actions} from 'react-native-router-flux';
 
 import PageContainer from '../../common/PageContainer';
 import TopicList from '../../common/TopicList';
 import SegmentedControl from './SegmentedControl';
+
+import NewTopicButtonImage from '../../assets/new_topic_icon.png';
 
 const tabData = [
   { slug: 'all', name: '全部' },
@@ -44,6 +47,12 @@ class DiscoveryTabPage extends Component {
     this._initViews();
   }
 
+  componentDidMount() {
+    Actions.refresh({
+      rightButtonImage: NewTopicButtonImage,
+      onRight: this.onNewTopicButtonPress
+    });
+  }
 
   onSegmentedControlButtonPress(index) {
     this.viewPager.goToPage(index);
@@ -68,7 +77,7 @@ class DiscoveryTabPage extends Component {
                             this.segmentedControl = ref;
                           }}
                           onPress={this.onSegmentedControlButtonPress.bind(this)}
-                          style={styles.segmentedControl}/>
+                          style={styles.segmentedControl} />
         <ViewPager
           ref={(ref) => {
             this.viewPager = ref;
@@ -89,12 +98,16 @@ class DiscoveryTabPage extends Component {
     return (
       <TopicList
         key={`tab_slug_${data.slug}`}
-        slug={data.slug}/>
+        slug={data.slug} />
     );
   }
 
   _onChangePage(i) {
     this.segmentedControl.setIndex(i);
+  }
+
+  onNewTopicButtonPress = () => {
+    Actions.newTopic({ nodeSlug: this.props.slug });
   }
 }
 

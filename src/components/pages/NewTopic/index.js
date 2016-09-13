@@ -6,6 +6,7 @@ import KeyboardSpacer from 'react-native-keyboard-spacer';
 
 import Style from '../../../utilities/style';
 import Networking from '../../../utilities/v2_networking';
+import SessionManager from '../../../utilities/session_manager';
 import StringUtilities from '../../../utilities/string';
 import NodeListManager from '../../../utilities/node_list_manager';
 import PageContainer from '../../common/PageContainer';
@@ -31,6 +32,10 @@ class NewTopicPage extends Component {
   componentDidMount() {
     this.setUpNavigationBar();
     this.setUpNode();
+
+    if(SessionManager.checkLoginWithUI() === false) {
+      Actions.pop();
+    }
   }
 
   setUpNode = () => {

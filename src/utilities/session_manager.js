@@ -1,6 +1,9 @@
 import Networking from './v2_networking';
 //noinspection JSUnresolvedVariable
 import {EventEmitter} from 'events';
+import {Alert} from 'react-native';
+import {Actions} from 'react-native-router-flux';
+
 import CookieManager from 'react-native-cookies';
 
 class SessionEmitter extends EventEmitter {
@@ -52,6 +55,18 @@ export default class SessionManager {
     } else {
       return !!currentUser;
     }
+  }
+
+  static checkLoginWithUI($ = null) {
+    const flag = SessionManager.checkLogin($);
+    if(flag === false) {
+      Alert.alert('无法继续', '您尚未登录，请登录',
+        [
+          {text: '取消', style: 'cancel'},
+          {text: '登录', onPress: () => Actions.login()},
+        ]);
+    }
+    return flag;
   }
 
   static async checkLoginAsync() {
