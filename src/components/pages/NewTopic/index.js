@@ -2,7 +2,7 @@ import React, {Component, PropTypes} from 'react';
 import {View, Text, TextInput, TouchableOpacity, Alert} from 'react-native';
 import {Actions} from 'react-native-router-flux';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import KeyboardSpacer from 'react-native-keyboard-spacer';
+import CustomKeyboardSpacer from '../../common/CustomKeyboardSpacer';
 
 import Style from '../../../utilities/style';
 import Networking from '../../../utilities/v2_networking';
@@ -110,7 +110,7 @@ class NewTopicPage extends Component {
             onChangeText={content =>this.setState({ content })}
             placeholder="内容" />
         </View>
-        <KeyboardSpacer />
+        <CustomKeyboardSpacer />
         <NodeSelector visible={nodeSelectorVisible} nodeSlug={nodeSlug} onCancel={this.onNodeSelectorCancel}
                       onSelect={this.onNodeSelectorSelect} />
       </PageContainer>
