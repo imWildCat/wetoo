@@ -1,13 +1,18 @@
 import cheerio from 'cheerio';
+import StringUtilities from './string';
 
-const V2Networking = {
-  get: (uri) => {
+let once = null;
+
+class V2Networking {
+  static get(uri) {
     return V2Networking.request('GET', uri);
-  },
-  getJSON: (uri) => {
+  }
+
+  static getJSON(uri) {
     return V2Networking.request('GET', uri, null, null, true);
-  },
-  post: (uri, data, additionalHeaders = null) => {
+  }
+
+  static post(uri, data, additionalHeaders = null) {
     const headers = Object.assign({ 'Content-Type': 'application/x-www-form-urlencoded' }, additionalHeaders);
     return V2Networking.request(
       'POST',
@@ -15,8 +20,9 @@ const V2Networking = {
       headers,
       { body: serializeJSON2FormData(data) }
     );
-  },
-  request: (method, uri, additionalHeaders = null, additionalOptions = null, rawResponse = false) => {
+  }
+
+  static request(method, uri, additionalHeaders = null, additionalOptions = null, rawResponse = false) {
     // TODO: Check user's setting for http/https
 
     const headers = Object.assign({
@@ -33,15 +39,37 @@ const V2Networking = {
     if (rawResponse) {
       return fetch(`https://www.v2ex.com${uri}`, options);
     } else {
-      return fetch(`https://www.v2ex.com${uri}`, options).then(res => res.text()).then(text => cheerio.load(text, { decodeEntities: false }));
+      return fetch(`https://www.v2ex.com${uri}`, options).then(res => res.text()).then(text => cheerio.load(text, { decodeEntities: false }))
+        .then($ => {
+          parseOnce($);
+          return $;
+        });
     }
   }
-};
+
+  static getOnce() {
+    return once;
+  }
+}
 
 function serializeJSON2FormData(data) {
   return Object.keys(data).map(function (keyName) {
     return `${encodeURIComponent(keyName)}=${encodeURIComponent(data[keyName])}`;
   }).join('&');
+}
+
+function parseOnce($) {
+  const logOutElement = $('a:contains("登出")');
+  const onClick = logOutElement.attr('onclick');
+  const tempOnce = StringUtilities.matchFirst(onClick, /signout\?once=(\d+)/);
+  if (tempOnce) {
+    once = tempOnce;
+    console.log('Once detected:', once);
+  } else {
+    console.log('Once code not found');
+  }
+
+  return once;
 }
 
 export default V2Networking;

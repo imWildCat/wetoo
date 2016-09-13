@@ -3,6 +3,7 @@ import {View, ListView, StyleSheet, ActivityIndicator, InteractionManager} from 
 import cheerio from 'cheerio';
 
 import StringUtilities from '../../../utilities/string';
+import Networking from '../../../utilities/v2_networking';
 
 import PageContainer from '../../common/PageContainer';
 import TopicHeader from './TopicHeader';
@@ -36,7 +37,7 @@ class TopicPage extends Component {
 
   renderPosts() {
     if (!this.state.dataSource) {
-      return <ActivityIndicator />;
+      return <ActivityIndicator style={{marginTop: 20}} />;
     } else {
       return (
         <ListView
@@ -59,15 +60,8 @@ class TopicPage extends Component {
   }
 
   loadTopic() {
-    fetch(`https://www.v2ex.com/t/${this.props.topicID}`, {
-      headers: {
-        'Accept': 'text/html',
-        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.112 Safari/537.36'
-      }
-    })
-      .then(response => response.text())
-      .then(text => {
-        const $ = cheerio.load(text, { decodeEntities: false });
+    Networking.get(`/t/${this.props.topicID}`)
+      .then($ => {
 
         // Parse topic
         const _topicMetaElement = $($('#Main div.box .header'));
