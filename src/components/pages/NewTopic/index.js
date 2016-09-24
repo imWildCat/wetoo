@@ -33,7 +33,7 @@ class NewTopicPage extends Component {
     this.setUpNavigationBar();
     this.setUpNode();
 
-    if(SessionManager.checkLoginWithUI() === false) {
+    if (SessionManager.checkLoginWithUI() === false) {
       Actions.pop();
     }
   }
@@ -74,8 +74,8 @@ class NewTopicPage extends Component {
   onRightButtonPress = () => {
     this.refs['titleTextInput'].blur();
     this.refs['contentTextInput'].blur();
-    const {isPosting} = this.state;
-    if(!isPosting) {
+    const { isPosting } = this.state;
+    if (!isPosting) {
       this.postNewTopic();
     }
   };
@@ -107,7 +107,7 @@ class NewTopicPage extends Component {
             ref="contentTextInput"
             style={styles.contentTextInput}
             multiline={true}
-            onChangeText={content =>this.setState({ content })}
+            onChangeText={content => this.setState({ content })}
             placeholder="内容" />
         </View>
         <CustomKeyboardSpacer />
@@ -157,7 +157,7 @@ class NewTopicPage extends Component {
       // Error:
       let problemString = $('.problem ul li').text();
       console.log('problemString:', problemString);
-      if(!problemString || problemString === '') {
+      if (!problemString || problemString === '') {
         problemString = '未知错误';
       }
       Alert.alert('发帖失败', problemString);
