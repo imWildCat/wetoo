@@ -14,7 +14,7 @@
     "react": "^15.3.1",
     "react-native": "^0.34.0",
     "react-native-button": "^1.6.0",
-    "react-native-code-push": "^1.13.2-beta",
+    "react-native-code-push": "^1.14.6-beta",
     "react-native-cookies": "^1.0.2",
     "react-native-gifted-listview": "BelinChung/react-native-gifted-listview#a64c4a5d66",
     "react-native-htmlview": "^0.5.0",

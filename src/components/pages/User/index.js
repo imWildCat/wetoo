@@ -55,16 +55,15 @@ class UserPage extends Component {
             {this._renderSignatureCompanyPosition(signature, company, position)}
           </View>
           <View style={styles.sectionGroup}>
-            <UserInfoRow text="话题" rowType="topic" onPress={() => {
-              this.props.pushUserTopicPage(username);
-            }} />
-            <UserInfoRow text="回复" rowType="reply" onPress={() => {
-            }} />
+            <UserInfoRow text="话题" rowType="topic" onPress={() => this.props.pushUserTopicPage(username)} />
           </View>
         </View>
       );
     }
   }
+
+  // <UserInfoRow text="回复" rowType="reply" onPress={() => {
+  // }} />
 
   _renderSignatureCompanyPosition(signature, company, position) {
     const elements = [];

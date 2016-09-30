@@ -26,6 +26,7 @@ class ReplyInput extends Component {
       <View style={styles.container}>
         <View style={styles.inputWrapper}>
           <TextInput
+            multiline={true}
             underlineColorAndroid="transparent" style={styles.textInput}
             onChangeText={content => this.setState({ content })} />
         </View>

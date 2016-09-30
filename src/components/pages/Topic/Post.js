@@ -1,5 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import {View, Text, Image, TouchableWithoutFeedback, StyleSheet, Dimensions } from 'react-native';
+import {Actions} from 'react-native-router-flux';
 
 import HTMLView from 'react-native-htmlview';
 
@@ -18,11 +19,11 @@ class Post extends Component {
     return (
       <View style={{ overflow: 'hidden' }}>
         <View style={styles.metaContainer}>
-          <TouchableWithoutFeedback onPress={() => { this.props.onUserPress(authorName); }}>
+          <TouchableWithoutFeedback onPress={() => Actions.user({username: authorName})}>
             <Image style={styles.avatarImage} source={{ uri: `https:${authorAvatarURI}` }} />
           </TouchableWithoutFeedback>
           <View style={styles.innerMetaContainer}>
-            <TouchableWithoutFeedback onPress={() => { this.props.onUserPress(authorName); }}>
+            <TouchableWithoutFeedback onPress={() => Actions.user({username: authorName})}>
               <View><Text style={styles.authorNameText}>{authorName}</Text></View>
             </TouchableWithoutFeedback>
             <Text style={styles.otherInfoText}>{this.buildOtherInfoText(time, floor)}</Text>

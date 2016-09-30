@@ -65,19 +65,21 @@ class MeTab extends Component {
     );
   }
 
+  //           <ActionRow title="设置" onPress={this.onSettingPress} iconImage={SettingIcon} />
+
+
   renderLoggedIn() {
-    const {name, avatarURI} = this.state.user;
+    const { name, avatarURI } = this.state.user;
     console.log('avatarURI:', avatarURI, name, this);
     return (
       <View>
-          <View style={styles.topBox}>
-            <View style={styles.emptyAvatar}>
-              <AvatarImage uri={avatarURI} style={styles.avatarImage} />
-            </View>
-            <Text style={styles.usernameText}>{name}</Text>
+        <View style={styles.topBox}>
+          <View style={styles.emptyAvatar}>
+            <AvatarImage uri={avatarURI} style={styles.avatarImage} />
           </View>
+          <Text style={styles.usernameText}>{name}</Text>
+        </View>
         <View style={styles.bottomBox}>
-          <ActionRow title="设置" onPress={this.onSettingPress} iconImage={SettingIcon} />
           <ActionRow showSeparator={false} title="注销" onPress={this.onLogOutPress} iconImage={LogOutIcon} />
         </View>
       </View>
@@ -102,7 +104,7 @@ class MeTab extends Component {
 
   async loadCurrentUser(user) {
     if (!user) {
-      this.setState({user});
+      this.setState({ user });
     } else {
       const { name } = user;
       try {
@@ -110,7 +112,7 @@ class MeTab extends Component {
         const avatarURI = $('img.avatar').attr('src');
         user.avatarURI = avatarURI;
         console.log('user:', user);
-        this.setState({user});
+        this.setState({ user });
       } catch (error) {
         console.log('error:', error);
       }

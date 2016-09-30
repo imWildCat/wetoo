@@ -1,5 +1,6 @@
 import React, {Component, PropTypes} from 'react';
-import {View, ListView, ActivityIndicator, InteractionManager} from 'react-native';
+import {View, ListView, ActivityIndicator, InteractionManager, Platform, ActionSheetIOS, Alert} from 'react-native';
+import {Actions} from 'react-native-router-flux';
 
 import StringUtilities from '../../../utilities/string';
 import Networking from '../../../utilities/v2_networking';
@@ -11,6 +12,8 @@ import TopicHeader from './TopicHeader';
 import Post from './Post';
 import ReplyInput from './ReplyInput';
 
+import ActionButtonImage from '../../assets/action_icon.png';
+
 class TopicPage extends Component {
 
   constructor(props) {
@@ -20,6 +23,7 @@ class TopicPage extends Component {
       topic: {},
       posts: [],
       dataSource: null,
+      reportLink: null,
     };
   }
 
@@ -27,7 +31,50 @@ class TopicPage extends Component {
     InteractionManager.runAfterInteractions(() => {
       this.loadTopic();
     });
+    this.setUpNavigationBar();
   }
+
+  setUpNavigationBar = () => {
+    if (Platform.OS === 'ios') {
+      Actions.refresh({
+        onRight: this.onRightButtonPress,
+        rightButtonTextStyle: { color: 'white' },
+        rightButtonImage: ActionButtonImage,
+      });
+    }
+  };
+
+  onRightButtonPress = () => {
+    if (Platform.OS === 'ios') {
+      ActionSheetIOS.showActionSheetWithOptions(
+        {
+          options: ['报告这个主题', '取消'],
+          cancelButtonIndex: 1,
+          destructiveButtonIndex: 0,
+        },
+        (index) => {
+          if (index === 0) {
+            this.reportTopic();
+          }
+        }
+      );
+    }
+  };
+
+  reportTopic = () => {
+    const { reportLink, isReported } = this.state;
+    if (isReported) {
+      Alert.alert('您已报告过此主题', '请不要重复提交');
+    } else if (reportLink) {
+      Networking.get(reportLink).then(() => {
+        Alert.alert('我们已收到您的报告', '感谢您的参与');
+      }, error => {
+        Alert.alert('网络错误', '报告失败');
+      });
+    } else {
+      Alert.alert('您尚未登录', '无法提交报告');
+    }
+  };
 
   render() {
     return (
@@ -62,7 +109,7 @@ class TopicPage extends Component {
   }
 
   loadTopic = ($ = null) => {
-    if($) {
+    if ($) {
       this.parseTopic($);
     } else {
       Networking.get(`/t/${this.props.topicID}`)
@@ -145,7 +192,17 @@ class TopicPage extends Component {
         return r1.id !== r2.id;
       }
     });
-    this.setState({ posts, dataSource: ds.cloneWithRows(posts) });
+
+    // Parse report link
+    const reportElement = $('a:contains("报告这个主题")');
+    const reportLink = StringUtilities.matchFirst(reportElement.attr('onclick'), /(\/report\/.+)'/);
+    let isReported = false;
+    const reportedSpanText = $('span:contains("你已对本主题进行了报告")').text();
+    if(reportedSpanText) {
+      isReported = true;
+    }
+
+    this.setState({ posts, dataSource: ds.cloneWithRows(posts), reportLink, isReported });
   };
 
 
