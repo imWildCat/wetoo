@@ -26,6 +26,7 @@
 		17C3D778DB1A490FA7199B9A /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = C55A5BD6082E4983B22032F0 /* libz.tbd */; };
 		22428D493B5042B2B9617A5C /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B38CABC89F7A4E7DB73F8D2D /* EvilIcons.ttf */; };
 		365AE1A008204E41BBFBB33B /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2374F5B669994666A50A07B6 /* Octicons.ttf */; };
+		4102AB208B655C83D83903BE /* libPods-Wetoo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D917DD6323BD202E716E6403 /* libPods-Wetoo.a */; };
 		48B1A2F39FE942DFBBBBBEF2 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AAC03B22472F4F10A126B70A /* FontAwesome.ttf */; };
 		5E93F2B51D4883C600445725 /* libRNVectorIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EB2A48E1D338CB200620B7D /* libRNVectorIcons.a */; };
 		5E93F2B61D4883D300445725 /* libRNCookieManagerIOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EB2A4A81D338CBE00620B7D /* libRNCookieManagerIOS.a */; };
@@ -159,12 +160,15 @@
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Wetoo/main.m; sourceTree = "<group>"; };
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
 		2374F5B669994666A50A07B6 /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
+		2A1A9E0B8C221B4D3AE37CE6 /* Pods-Wetoo.staging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Wetoo.staging.xcconfig"; path = "Pods/Target Support Files/Pods-Wetoo/Pods-Wetoo.staging.xcconfig"; sourceTree = "<group>"; };
 		36853F37FF4346C88F91655F /* Entypo.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Entypo.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Entypo.ttf"; sourceTree = "<group>"; };
 		3A4CF82438BD41FBB57A297E /* CodePush.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = CodePush.xcodeproj; path = "../node_modules/react-native-code-push/ios/CodePush.xcodeproj"; sourceTree = "<group>"; };
+		3D21CC46943B50345C101EC4 /* Pods-Wetoo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Wetoo.release.xcconfig"; path = "Pods/Target Support Files/Pods-Wetoo/Pods-Wetoo.release.xcconfig"; sourceTree = "<group>"; };
 		4A5E9B9285C84F38A9F2E55F /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
 		55A59BF9A8E746779DFE4C01 /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Foundation.ttf"; sourceTree = "<group>"; };
 		73CEC6B17ABC4602B55778A5 /* RNCookieManagerIOS.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNCookieManagerIOS.xcodeproj; path = "../node_modules/react-native-cookies/RNCookieManagerIOS.xcodeproj"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
+		7BA1AC1C3A9ADFBA2C35D2EF /* Pods-Wetoo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Wetoo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Wetoo/Pods-Wetoo.debug.xcconfig"; sourceTree = "<group>"; };
 		7F5130B7D0D44D5BB9EE2304 /* RNVectorIcons.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNVectorIcons.xcodeproj; path = "../node_modules/react-native-vector-icons/RNVectorIcons.xcodeproj"; sourceTree = "<group>"; };
 		823625AAC350410D88A2F3BA /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
@@ -172,6 +176,7 @@
 		AF9DAFB9C05B45DDBF7B2F8D /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; };
 		B38CABC89F7A4E7DB73F8D2D /* EvilIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = EvilIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
 		C55A5BD6082E4983B22032F0 /* libz.tbd */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		D917DD6323BD202E716E6403 /* libPods-Wetoo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Wetoo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -201,6 +206,7 @@
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
 				17C3D778DB1A490FA7199B9A /* libz.tbd in Frameworks */,
+				4102AB208B655C83D83903BE /* libPods-Wetoo.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -317,6 +323,16 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		16C7C30528FE716DDDB357A4 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				7BA1AC1C3A9ADFBA2C35D2EF /* Pods-Wetoo.debug.xcconfig */,
+				3D21CC46943B50345C101EC4 /* Pods-Wetoo.release.xcconfig */,
+				2A1A9E0B8C221B4D3AE37CE6 /* Pods-Wetoo.staging.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		5EB2A4801D338CB200620B7D /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -386,6 +402,7 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				06DBD13744254B8BB4CF4CA7 /* Resources */,
 				CBD115D142B24F56A0F18F0C /* Frameworks */,
+				16C7C30528FE716DDDB357A4 /* Pods */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -404,6 +421,7 @@
 			isa = PBXGroup;
 			children = (
 				C55A5BD6082E4983B22032F0 /* libz.tbd */,
+				D917DD6323BD202E716E6403 /* libPods-Wetoo.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -433,10 +451,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "Wetoo" */;
 			buildPhases = (
+				C809D0D0C94DFD47611C741E /* [CP] Check Pods Manifest.lock */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
+				019D5FEBC0CF1AC6F0E1B863 /* [CP] Embed Pods Frameworks */,
+				2B81A1F8665ED3E2372F22A3 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -674,6 +695,51 @@
 			shellPath = /bin/sh;
 			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/packager/react-native-xcode.sh";
 		};
+		019D5FEBC0CF1AC6F0E1B863 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Wetoo/Pods-Wetoo-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		2B81A1F8665ED3E2372F22A3 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Wetoo/Pods-Wetoo-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C809D0D0C94DFD47611C741E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -760,6 +826,7 @@
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7BA1AC1C3A9ADFBA2C35D2EF /* Pods-Wetoo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -787,6 +854,7 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3D21CC46943B50345C101EC4 /* Pods-Wetoo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -857,6 +925,7 @@
 		};
 		5EB2A4C81D3390C700620B7D /* Staging */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2A1A9E0B8C221B4D3AE37CE6 /* Pods-Wetoo.staging.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";

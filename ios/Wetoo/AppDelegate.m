@@ -9,6 +9,7 @@
 
 #import "AppDelegate.h"
 #import "CodePush.h"
+#import <AVOSCloud/AVOSCloud.h>
 
 #import "RCTBundleURLProvider.h"
 #import "RCTRootView.h"
@@ -19,7 +20,7 @@
 {
   NSURL *jsCodeLocation;
 
-  // [[RCTBundleURLProvider sharedSettings] setDefaults];
+//   [[RCTBundleURLProvider sharedSettings] setDefaults];
   
 #ifdef DEBUG
     jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index.ios" fallbackResource:nil];
@@ -38,7 +39,16 @@
   rootViewController.view = rootView;
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
+  
+  [self customSetUp:launchOptions];
+  
   return YES;
+}
+
+- (void)customSetUp:(NSDictionary *)launchOptions {
+  [AVOSCloud setApplicationId:@"FBrnCyfhKAFtrQWplRNEkUKq-gzGzoHsz"
+                    clientKey:@"xcwarpwn1iB2z7EqoKFwMrfr"];
+  [AVAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
 }
 
 @end

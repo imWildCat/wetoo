@@ -3,6 +3,7 @@ package io.wildcat.wetoo;
 import android.app.Application;
 import android.util.Log;
 
+import com.avos.avoscloud.AVOSCloud;
 import com.facebook.react.ReactApplication;
 import com.facebook.react.ReactInstanceManager;
 import com.facebook.react.ReactNativeHost;
@@ -18,6 +19,13 @@ import java.util.Arrays;
 import java.util.List;
 
 public class MainApplication extends Application implements ReactApplication {
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+
+        AVOSCloud.initialize(this,"FBrnCyfhKAFtrQWplRNEkUKq-gzGzoHsz","xcwarpwn1iB2z7EqoKFwMrfr");
+    }
 
     private final ReactNativeHost mReactNativeHost = new ReactNativeHost(this) {
         @Override
