@@ -31,6 +31,26 @@ Feel free to open an issue if you have any question. But it is strongly recommen
 - [ ] Full-text search
 - [ ] Add images while creating topics or replies
 - [ ] Show favorite counts or appreciation counts for topics and replies
+- [ ] Implement global store by [Mobx](https://github.com/mobxjs/mobx)
+
+
+## Releases
+
+This project will be always released by App Store and Google Play (in the future). However, hot fixes will be released by [Code Push](http://microsoft.github.io/code-push/) and updated while starting or resuming the app.
+
+`Makefile` contains some commands to release hot fixes:
+
+- `make cpas des="[RELEASE NOTES]"` : Make mandatory staging hot fix for Android.
+- `make cpasm des="[RELEASE NOTES]"` : Make mandatory staging hot fix for Android.
+- `make cpap des="[RELEASE NOTES]"` : Make production hot fix for Android.
+- `make cpapm des="[RELEASE NOTES]"` : Make mandatory production hot fix for Android.
+- `make cpis des="[RELEASE NOTES]"` : Make staging hot fix for iOS.
+- `make cpism des="[RELEASE NOTES]"` : Make mandatory staging hot fix for iOS. 
+- `make cpip des="[RELEASE NOTES]"` : Make production hot fix for iOS.
+- `make cpipm des="[RELEASE NOTES]"` : Make mandatory production hot fix for iOS.
+
+Note: **The Code Push app is currently managed by the maintainer. If you would like to test it, please login and add your own deployment keys.**
+
 
 ## Known issues
 
