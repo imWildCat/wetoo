@@ -23,7 +23,6 @@ class TopicListPage extends Component {
   };
 
   onFetch = (page = 1, callback, options) => {
-    console.log({options});
     const { slug, isNode } = this.props;
     const uri = isNode ? `/go/${slug}` : `?tab=${slug}`;
     V2Networking.get(uri)

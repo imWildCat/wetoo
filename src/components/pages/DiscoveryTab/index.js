@@ -1,6 +1,5 @@
 import React, {Component, PropTypes} from 'react';
 import {View, StyleSheet} from 'react-native';
-import ViewPager from 'react-native-viewpager';
 import {Actions} from 'react-native-router-flux';
 
 import PageContainer from '../../common/PageContainer';
@@ -25,23 +24,10 @@ const tabData = [
 
 class DiscoveryTabPage extends Component {
 
-  constructor(props) {
-    super(props);
-    // Use this flag to avoid the bug about that `react-native-scrollable-tab-view` could call onChangeTab() twice
-    this.currentIndex = 0;
-
-    this.segmentedControlTitles = [];
-
-    // Configure ViewPager
-    const dataSource = new ViewPager.DataSource({
-      pageHasChanged: (p1, p2) => p1.slug !== p2.slug,
-    });
-
-    this.state = {
-      dataSource: dataSource.cloneWithPages(tabData)
-    };
-  }
-
+  segmentedControlTitles = [];
+  state = {
+    index: 0,
+  };
 
   componentWillMount() {
     this._initViews();
@@ -55,7 +41,7 @@ class DiscoveryTabPage extends Component {
   }
 
   onSegmentedControlButtonPress(index) {
-    this.viewPager.goToPage(index);
+    this.setState({ index });
   }
 
   _initViews() {
@@ -78,23 +64,16 @@ class DiscoveryTabPage extends Component {
                           }}
                           onPress={this.onSegmentedControlButtonPress.bind(this)}
                           style={styles.segmentedControl} />
-        <ViewPager
-          ref={(ref) => {
-            this.viewPager = ref;
-          }}
-          style={{ flex: 1 }}
-          dataSource={this.state.dataSource}
-          renderPage={this._renderPage.bind(this)}
-          onChangePage={this._onChangePage.bind(this)}
-          isLoop={false}
-          autoPlay={false}
-          renderPageIndicator={false}
-        />
+        {this.renderContent()}
       </PageContainer>
     );
   }
 
-  _renderPage(data, pageID) {
+  renderContent = () => {
+    return this.renderPage(tabData[this.state.index]);
+  };
+
+  renderPage(data) {
     return (
       <TopicList
         key={`tab_slug_${data.slug}`}
@@ -102,9 +81,6 @@ class DiscoveryTabPage extends Component {
     );
   }
 
-  _onChangePage(i) {
-    this.segmentedControl.setIndex(i);
-  }
 
   onNewTopicButtonPress = () => {
     Actions.newTopic({ nodeSlug: this.props.slug });
