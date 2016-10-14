@@ -79,6 +79,7 @@ const styles = Style.create({
   navigationBarStyle: {
     backgroundColor: '#329EED',
     borderBottomWidth: 0,
+    borderBottomColor: 'lightgray',
   },
   titleStyle: {
     color: '#FFFFFF'

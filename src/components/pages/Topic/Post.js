@@ -14,6 +14,11 @@ const imageMaxWidth = screenWidth - 16 * 2;
 
 class Post extends Component {
 
+  componentWillMount() {
+    this.content = this.props.content.replace(/@(\<a\ href=\"\/member\/\w+\"\>)/, '$1@');
+    console.log('new content:', this.content);
+  }
+
   render() {
     const { /* id, */ content, authorAvatarURI, authorName, time, floor /*, appreciationCount*/ } = this.props;
 
@@ -33,7 +38,7 @@ class Post extends Component {
         <View style={styles.htmlViewWrapper}>
           <HTMLRender renderNode={this.renderNode}
                       stylesheet={htmlViewStyles}
-                      value={`<div>${content}</div>`}
+                      value={`<div>${this.content}</div>`}
                       onLinkPress={this._onLinkPress} />
         </View>
         <View style={styles.separator} />
