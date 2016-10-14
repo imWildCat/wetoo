@@ -1,14 +1,16 @@
-import React, {Component, PropTypes} from 'react';
-import {View, Text, Image, TouchableWithoutFeedback, StyleSheet, Dimensions } from 'react-native';
+import React, {Component} from 'react';
+import {View, Text, Image, TouchableWithoutFeedback, Dimensions, StyleSheet} from 'react-native';
 import {Actions} from 'react-native-router-flux';
 
 import HTMLView from 'react-native-htmlview';
+import HTMLRender from 'react-native-html-render';
 
 import StringUtilities from '../../../utilities/string';
+import Style from '../../../utilities/style';
 import LinkHandler from '../../../utilities/link_handler';
 import ResizableImage from '../../common/ResizableImage';
 
-const {width: screenWidth} = Dimensions.get('window');
+const { width: screenWidth } = Dimensions.get('window');
 const imageMaxWidth = screenWidth - 16 * 2;
 
 class Post extends Component {
@@ -19,29 +21,33 @@ class Post extends Component {
     return (
       <View style={{ overflow: 'hidden' }}>
         <View style={styles.metaContainer}>
-          <TouchableWithoutFeedback onPress={() => Actions.user({username: authorName})}>
+          <TouchableWithoutFeedback onPress={() => Actions.user({ username: authorName })}>
             <Image style={styles.avatarImage} source={{ uri: `https:${authorAvatarURI}` }} />
           </TouchableWithoutFeedback>
           <View style={styles.innerMetaContainer}>
-            <TouchableWithoutFeedback onPress={() => Actions.user({username: authorName})}>
+            <TouchableWithoutFeedback onPress={() => Actions.user({ username: authorName })}>
               <View><Text style={styles.authorNameText}>{authorName}</Text></View>
             </TouchableWithoutFeedback>
             <Text style={styles.otherInfoText}>{this.buildOtherInfoText(time, floor)}</Text>
           </View>
         </View>
         <View style={styles.htmlViewWrapper}>
-          <HTMLView value={content}
-            stylesheet={htmlViewStyles}
-            renderNode={this.renderNode}
-            onLinkPress={this._onLinkPress.bind(this)} />
+          {/*<HTMLView value={content}*/}
+          {/*stylesheet={htmlViewStyles}*/}
+          {/*renderNode={this.renderNode}*/}
+          {/*onLinkPress={this._onLinkPress.bind(this)} />*/}
+          <HTMLRender renderNode={this.renderNode}
+                      stylesheet={htmlViewStyles}
+                      value={`<div>${content}</div>`}
+                      onLinkPress={this._onLinkPress} />
         </View>
         <View style={styles.separator} />
       </View>
     );
   }
 
-  renderNode(node) {
-    if (node.type === 'tag') {
+  renderNode(node, index, parent, type) {
+    if (node.type == 'block' && type == 'block') {
       if (node.name === 'img') {
         var img_w = +node.attribs['width'] || +node.attribs['data-width'] || 0;
         var img_h = +node.attribs['height'] || +node.attribs['data-height'] || 0;
@@ -61,7 +67,7 @@ class Post extends Component {
         };
         console.log({ imageMaxWidth });
         return (
-          <ResizableImage source={source} style={imgStyle} maxWidth={imageMaxWidth} />
+          <ResizableImage key={index} source={source} style={imgStyle} maxWidth={imageMaxWidth} />
         );
       }
     }
@@ -118,8 +124,10 @@ const styles = StyleSheet.create({
   },
 });
 
-const htmlViewStyles = StyleSheet.create({
-
+const htmlViewStyles = Style.create({
+  a: {
+    color: '#3498DB',
+  },
 });
 
 export default Post;

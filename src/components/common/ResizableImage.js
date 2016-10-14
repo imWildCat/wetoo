@@ -7,7 +7,6 @@ import {
 const { width: screenWidth } = Dimensions.get('window');
 
 var baseStyle = {
-  backgroundColor: 'red',
 };
 
 class ResizableImage extends Component {
