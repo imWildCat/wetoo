@@ -78,6 +78,7 @@ class App extends Component {
 const styles = Style.create({
   navigationBarStyle: {
     backgroundColor: '#329EED',
+    borderBottomWidth: 0,
   },
   titleStyle: {
     color: '#FFFFFF'

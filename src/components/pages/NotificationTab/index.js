@@ -9,7 +9,7 @@ import Style from '../../../utilities/style';
 import SessionManager from '../../../utilities/session_manager';
 
 import AvatarImage from '../../common/AvatarImage';
-import HTMLView from '../../common/HTMLView';
+import HTMLRender from '../../common/HTMLRender';
 import GiftedListView from '../../common/GiftedListView';
 import PageContainer from '../../common/PageContainer';
 import TouchableRow from '../../common/TouchableRow';
@@ -44,8 +44,8 @@ class NotificationTab extends Component {
           </TouchableWithoutFeedback>
         </View>
         <View style={styles.rightColumn}>
-          <HTMLView stylesheet={metaHTMLStyle} value={metaHTML} enableDefaultLinkHandler />
-          <HTMLView style={styles.content} stylesheet={contentHTMLStyle} value={`<div>${content || ''}</div>`}
+          <HTMLRender stylesheet={metaHTMLStyle} value={metaHTML} enableDefaultLinkHandler />
+          <HTMLRender style={styles.content} stylesheet={contentHTMLStyle} value={`<div>${content || ''}</div>`}
                     enableDefaultLinkHandler />
           <Text style={styles.timeText}>{time}</Text>
         </View>

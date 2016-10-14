@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import {View, Text, Image, TouchableWithoutFeedback, Dimensions, StyleSheet} from 'react-native';
 import {Actions} from 'react-native-router-flux';
 
-import HTMLView from 'react-native-htmlview';
 import HTMLRender from 'react-native-html-render';
 
 import StringUtilities from '../../../utilities/string';
@@ -32,10 +31,6 @@ class Post extends Component {
           </View>
         </View>
         <View style={styles.htmlViewWrapper}>
-          {/*<HTMLView value={content}*/}
-          {/*stylesheet={htmlViewStyles}*/}
-          {/*renderNode={this.renderNode}*/}
-          {/*onLinkPress={this._onLinkPress.bind(this)} />*/}
           <HTMLRender renderNode={this.renderNode}
                       stylesheet={htmlViewStyles}
                       value={`<div>${content}</div>`}
