@@ -14,6 +14,7 @@ import MeTab from '../components/pages/MeTab';
 import TopicPageContainer from './TopicPage';
 import UserPageContainer from './UserPage';
 import UserTopicPageContainer from './UserTopicPage';
+import UserReply from '../components/pages/UserReply';
 
 import NodeListPage from '../components/pages/NodeList';
 import NodePage from '../components/pages/Node';
@@ -65,6 +66,7 @@ class App extends Component {
             <Scene key="topic" component={TopicPageContainer} title="阅读话题" />
             <Scene key="user" component={UserPageContainer} title="用户" />
             <Scene key="user_topic" component={UserTopicPageContainer} title="用户话题" />
+            <Scene key="userReply" component={UserReply} title="用户回复" />
             <Scene key="node" component={NodePage} title="节点" />
             <Scene key="login" component={LoginPage} direction="vertical" hideNavBar={true} />
             <Scene key="newTopic" component={NewTopicPage} title="创建话题" />
