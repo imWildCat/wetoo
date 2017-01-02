@@ -13,7 +13,7 @@ Feel free to open an issue if you have any question. But it is strongly recommen
 
 ## Downloads
 
-- Android: Currently it is shown on [Releases](https://github.com/imWildCat/wetoo-react-native/releases) , however, it will be available on Google Play after some optimization.
+- Android: It is available on [Google Play](https://play.google.com/store/apps/details?id=io.wildcat.wetoo) and [Coolapk](http://www.coolapk.com/apk/io.wildcat.wetoo). In addition, you can also download it from [releases](https://github.com/imWildCat/wetoo-react-native/releases).
 - iOS: It is available on [App Store](https://itunes.apple.com/cn/app/wetoo-v2ex-di-san-fang-kai/id1122433099).
 
 ## Roadmap
